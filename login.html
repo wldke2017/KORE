@@ -38,28 +38,12 @@
       overflow: hidden;
     }
 
-    /* Floating Headset Support Badge on the right edge */
-    .floating-support-badge {
-      position: absolute;
-      top: 175px;
-      right: -2px;
-      background: #ffffff;
-      border-radius: 50% 0 0 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.15);
-      z-index: 20;
-    }
-
     /* ── Top bar ── */
     .login-topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 20px 10px 20px;
+      padding: 20px 20px 0 20px;
     }
 
     .btn-close {
@@ -67,7 +51,7 @@
       border: none;
       cursor: pointer;
       color: #ffffff;
-      padding: 4px;
+      padding: 0;
       line-height: 0;
       transition: opacity 0.2s;
     }
@@ -78,7 +62,7 @@
       border: none;
       cursor: pointer;
       color: #8c93a4;
-      padding: 4px;
+      padding: 0;
       line-height: 0;
       transition: color 0.2s;
     }
@@ -86,16 +70,17 @@
 
     /* ── Login Title ── */
     .login-title {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 800;
       color: #ffffff;
-      padding: 20px 24px 18px 24px;
+      padding: 24px 20px 20px 20px;
+      margin: 0;
     }
 
     /* ── Scrollable form body ── */
     .login-body {
       flex: 1;
-      padding: 0 24px 40px 24px;
+      padding: 0 20px 40px 20px;
       overflow-y: auto;
     }
 
@@ -264,14 +249,6 @@
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       </button>
-    </div>
-
-    <!-- Floating Support Headset Badge on right edge -->
-    <div class="floating-support-badge">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c4dff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-      </svg>
     </div>
 
     <!-- Title -->
