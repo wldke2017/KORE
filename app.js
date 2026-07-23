@@ -125,6 +125,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Real-Time Crypto Price Fetcher (Binance API) ────────────────────────
+  const coinSymbols = ['BTC', 'ETH', 'TRUMP', 'XTZ', 'ADA', 'TRX', 'BNB', 'YFI', 'ETC', 'XRP', 'SOL', 'USDC', 'LTC', 'KNC', 'DOGE', 'VET', 'SHIB', 'QTUM'];
+  
+  async function fetchLiveMarketData() {
+    try {
+      // Fetch 24hr ticker price change statistics for all pairs
+      const response = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+      if (!response.ok) return;
+      const data = await response.json();
+      
+      // Create price map for quick lookup
+      const priceMap = {};
+      data.forEach(item => {
+        if (item.symbol.endsWith('USDT')) {
+          const coinName = item.symbol.replace('USDT', '');
+          priceMap[coinName] = {
+            price: parseFloat(item.lastPrice),
+            changePercent: parseFloat(item.priceChangePercent)
+          };
+        }
+      });
+
+      // Update UI coin rows dynamically
+      coinRows.forEach(row => {
+        const symbolEl = row.querySelector('.coin-symbol');
+        if (!symbolEl) return;
+        const symbol = symbolEl.innerText.trim();
+        const coinData = priceMap[symbol];
+
+        if (coinData) {
+          const priceEl = row.querySelector('.coin-price');
+          const changeEl = row.querySelector('.coin-change');
+
+          if (priceEl) {
+            // Format price with appropriate decimal places based on magnitude
+            let formattedPrice = '';
+            if (coinData.price < 0.001) {
+              formattedPrice = '$' + coinData.price.toFixed(6);
+            } else if (coinData.price < 1) {
+              formattedPrice = '$' + coinData.price.toFixed(4);
+            } else if (coinData.price < 10) {
+              formattedPrice = '$' + coinData.price.toFixed(3);
+            } else {
+              formattedPrice = '$' + coinData.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+            priceEl.innerText = formattedPrice;
+          }
+
+          if (changeEl) {
+            const isUp = coinData.changePercent >= 0;
+            const prefix = isUp ? '+' : '';
+            changeEl.innerText = `${prefix}${coinData.changePercent.toFixed(2)}%`;
+            changeEl.className = `coin-change ${isUp ? 'change-up' : 'change-down'}`;
+          }
+        }
+      });
+    } catch (err) {
+      console.warn('Could not fetch live market data from Binance API:', err);
+    }
+  }
+
+  // Fetch immediately and poll every 5 seconds for live updates
+  fetchLiveMarketData();
+  setInterval(fetchLiveMarketData, 5000);
+  // ────────────────────────────────────────────────────────────────────────
+
   // Simple Toast Notification
   function showToast(message) {
     // Remove existing toast if present
