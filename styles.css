@@ -1,0 +1,467 @@
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: #0b0d13;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* App Viewport Container (Standard Mobile Dimensions on Desktop, Native Fluid on Mobile) */
+.app-container {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  background-color: #141722;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+/* Main Scrollable Content Area */
+.scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 85px; /* Leave space for bottom nav */
+  scrollbar-width: thin;
+  scrollbar-color: #2a2e3d transparent;
+}
+
+.scroll-content::-webkit-scrollbar {
+  width: 4px;
+}
+.scroll-content::-webkit-scrollbar-thumb {
+  background: #2a2e3d;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Yellow Header Section
+   ========================================================================== */
+.header-yellow {
+  background-color: #f7f230; /* Vivid Kore Yellow */
+  padding: 16px 18px 24px 18px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: #111111;
+}
+
+/* Top Nav */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.3px;
+}
+
+.profile-btn {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.profile-btn:active {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+/* Assets Row */
+.assets-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.assets-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #6e7314;
+}
+
+.login-btn {
+  align-self: flex-start;
+  background-color: #eba310; /* Golden Yellow Login Button */
+  color: #111111;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 26px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(235, 163, 16, 0.25);
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+.login-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.95);
+}
+
+/* Action Icons Row */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  text-align: center;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.action-circle {
+  width: 52px;
+  height: 52px;
+  background-color: #171b26; /* Dark Circle */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.action-item:hover .action-circle {
+  transform: translateY(-2px);
+  background-color: #222736;
+}
+
+.action-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111111;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Banner Promo Section
+   ========================================================================== */
+.banner-section {
+  padding: 16px;
+}
+
+.promo-card {
+  background: linear-gradient(145deg, #13151e 0%, #0e1019 60%, #111420 100%);
+  border: 1px solid #2a2e40;
+  border-radius: 16px;
+  padding: 18px 16px 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 0 80px rgba(0, 180, 100, 0.03);
+}
+
+.promo-content {
+  z-index: 2;
+}
+
+.promo-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.promo-brand-text {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+
+.promo-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.promo-desc {
+  font-size: 12px;
+  font-weight: 400;
+  color: #b0b6c5;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.promo-desc strong {
+  font-weight: 700;
+  color: #d8dde8;
+}
+
+.promo-highlight {
+  font-size: 13px;
+  font-weight: 700;
+  font-style: italic;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
+
+.promo-graphic {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neon-cube,
+.neon-emblem {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ==========================================================================
+   Market Section
+   ========================================================================== */
+.market-section {
+  padding: 8px 18px 20px 18px;
+}
+
+.market-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.market-headers {
+  display: grid;
+  grid-template-columns: 2.2fr 1.8fr 2fr;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #727b8a;
+  padding-bottom: 12px;
+}
+
+.col-coin { text-align: left; }
+.col-trend { text-align: center; }
+.col-price { text-align: right; }
+
+/* Coin List Rows */
+.coin-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.coin-row {
+  display: grid;
+  grid-template-columns: 2.2fr 1.8fr 2fr;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.coin-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Coin Icons Styling */
+.coin-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.icon-btc { background: linear-gradient(135deg, #f7931a, #d87902); }
+.icon-eth { background: linear-gradient(135deg, #627eea, #3b50a1); }
+.icon-trump { background: #000000; border: 1px solid #333; font-size: 8px; }
+.trump-badge { background: #ff4d4f; color: #fff; padding: 2px 4px; border-radius: 3px; font-weight: 800; }
+.icon-xtz { background: #2c7df7; font-size: 13px; font-weight: 700; }
+.icon-ada { background: #0033ad; font-size: 18px; }
+.icon-trx { background: #ef0027; font-size: 11px; }
+.icon-bnb { background: #f3ba2f; color: #111; }
+.icon-yfi { background: #006ae3; }
+.icon-a { background: #2563eb; font-size: 11px; font-weight: 800; }
+.icon-melania { background: #222; font-size: 16px; border: 1px solid #444; }
+.icon-etc { background: #34fa99; color: #111; }
+.icon-xrp { background: #000000; border: 1px solid #333; }
+.icon-sol { background: linear-gradient(135deg, #9945ff, #14f195); }
+.icon-usdc { background: #2775ca; font-weight: 700; }
+.icon-ltc { background: #345d9d; }
+.icon-knc { background: #31cb9e; font-size: 18px; }
+.icon-doge { background: #c2a633; }
+.icon-vet { background: #15bdff; font-weight: 800; }
+.icon-shib { background: #e04400; font-size: 16px; }
+.icon-qtum { background: #2e9ad0; font-size: 16px; }
+
+.coin-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.coin-symbol {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.coin-pair {
+  font-size: 11px;
+  font-weight: 500;
+  color: #616a78;
+  margin-top: 2px;
+}
+
+/* Sparklines */
+.coin-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+}
+
+.sparkline {
+  width: 75px;
+  height: 28px;
+  overflow: visible;
+}
+
+/* Prices & Percentage Colors */
+.coin-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.coin-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.coin-change {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.change-up { color: #00d084; }
+.change-down { color: #ff4d4f; }
+.change-zero { color: #00d084; }
+
+/* ==========================================================================
+   Fixed Bottom Navigation Bar
+   ========================================================================== */
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background-color: #141722;
+  border-top: 1px solid #1f2433;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 12px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #7b8392; /* Inactive color */
+  transition: color 0.15s ease, transform 0.15s ease;
+  width: 25%;
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Active State styling */
+.nav-item.active {
+  color: #f7f230; /* Active Yellow */
+}
+
+.nav-item.active .nav-icon svg {
+  stroke: #f7f230;
+}
+
+/* Home Indicator Pill */
+.home-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background-color: #3b4252;
+  border-radius: 2px;
+}

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kore Exchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Wrapper / Phone Container for Desktop & Native Mobile View -->
+  <div class="app-container">
+
+    <!-- Scrollable Content Area -->
+    <main class="scroll-content">
+
+      <!-- Yellow Header Area -->
+      <header class="header-yellow">
+        <!-- Top Navbar -->
+        <div class="top-nav">
+          <div class="brand">
+            <div class="brand-logo">
+              <!-- Exact Kore Logo: Black rounded box with white K and micro KORE stripes below -->
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="9" fill="#0c0e15"/>
+                <!-- Bold Geometric White K -->
+                <path d="M10 8H16V18L24.5 8H31L20.5 19.5L31 32H24.5L16 21V32H10V8Z" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <span class="brand-title">Kore Exchange</span>
+          </div>
+
+          <button class="profile-btn" aria-label="Profile">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Assets Row -->
+        <div class="assets-section">
+          <span class="assets-label">Assets</span>
+          <button class="login-btn" id="loginBtn" onclick="window.location.href='login.html'">Login</button>
+        </div>
+
+        <!-- Action Icons Row -->
+        <div class="action-grid">
+          <div class="action-item">
+            <div class="action-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </div>
+            <span class="action-label">Deposit</span>
+          </div>
+
+          <div class="action-item">
+            <div class="action-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </div>
+            <span class="action-label">Share</span>
+          </div>
+
+          <div class="action-item">
+            <div class="action-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </div>
+            <span class="action-label">Online Service</span>
+          </div>
+
+          <div class="action-item">
+            <div class="action-circle">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"></line>
+                <polyline points="5 12 12 5 19 12"></polyline>
+              </svg>
+            </div>
+            <span class="action-label">Withdraw</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Promo Banner Section -->
+      <section class="banner-section">
+        <div class="promo-card">
+          <div class="promo-content">
+            <div class="promo-brand">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                <path d="M4 4h4v7.5l7.5-7.5h5.5l-8.5 8.5L22 20h-5.5l-8.5-8.5V20H4V4z"/>
+              </svg>
+              <span class="promo-brand-text">KORE</span>
+            </div>
+            <h2 class="promo-title">Connect globally</h2>
+            <p class="promo-desc">enjoy ultimate <strong>trading speed</strong>,<br>and control your wealth</p>
+            <p class="promo-highlight">anytime, anywhere!</p>
+          </div>
+
+          <div class="promo-graphic">
+            <!-- Glowing Green Emblem Graphic Matching Reference 100% -->
+            <div class="neon-emblem">
+              <svg width="115" height="115" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer Green Dashed Circle -->
+                <circle cx="60" cy="60" r="54" stroke="#00ff66" stroke-width="1.8" stroke-dasharray="3 3.5" opacity="0.85"/>
+                
+                <!-- Inner Green Ring -->
+                <circle cx="60" cy="60" r="45" stroke="#00ff66" stroke-width="2.5"/>
+                <circle cx="60" cy="60" r="44" fill="#080c10"/>
+
+                <!-- Glowing Neon Green K -->
+                <g filter="url(#greenGlow)">
+                  <path d="M42 26 H53 V52 L73 26 H87 L64 56 L88 94 H74 L53 60 V94 H42 V26 Z" fill="#00FF66"/>
+                </g>
+
+                <!-- Bold White Upward Arrow on bottom leg of K -->
+                <path d="M60 88 V60 M52 68 L60 58 L68 68" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                <!-- Bitcoin Orange Coin Badge (Bottom-Left) -->
+                <circle cx="25" cy="88" r="10" fill="#F7931A" stroke="#080c10" stroke-width="2"/>
+                <text x="25" y="92" font-family="Inter, sans-serif" font-weight="900" font-size="10" fill="white" text-anchor="middle">₿</text>
+
+                <!-- Tether Green Coin Badge (Bottom-Right) -->
+                <circle cx="94" cy="76" r="8" fill="#26A17B" stroke="#080c10" stroke-width="1.5"/>
+                <text x="94" y="79.5" font-family="Inter, sans-serif" font-weight="800" font-size="8" fill="white" text-anchor="middle">T</text>
+
+                <!-- Filter for Neon Glow -->
+                <defs>
+                  <filter id="greenGlow" x="20" y="5" width="80" height="110" filterUnits="userSpaceOnUse">
+                    <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Market Section -->
+      <section class="market-section">
+        <h3 class="market-title">Market</h3>
+
+        <div class="market-headers">
+          <span class="col-coin">Coin</span>
+          <span class="col-trend">Weekly trend</span>
+          <span class="col-price">Price</span>
+        </div>
+
+        <!-- Coin List -->
+        <div class="coin-list" id="coinList">
+
+          <!-- 1. BTC -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-btc">₿</div>
+              <div class="coin-names">
+                <span class="coin-symbol">BTC</span>
+                <span class="coin-pair">BTC/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 28 Q 20 28, 30 22 T 55 24 T 75 14 T 95 8" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$65091.80</span>
+              <span class="coin-change change-up">+1.05%</span>
+            </div>
+          </div>
+
+          <!-- 2. ETH -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-eth">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 1.75L5.75 12.25L12 16L18.25 12.25L12 1.75ZM12 17.25L5.75 13.5L12 22.25L18.25 13.5L12 17.25Z"/>
+                </svg>
+              </div>
+              <div class="coin-names">
+                <span class="coin-symbol">ETH</span>
+                <span class="coin-pair">ETH/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 32 Q 25 32, 40 22 T 65 24 T 80 12 T 95 5" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$1894.56</span>
+              <span class="coin-change change-up">+1.88%</span>
+            </div>
+          </div>
+
+          <!-- 3. TRUMP -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-trump">
+                <div class="trump-badge">TRUMP</div>
+              </div>
+              <div class="coin-names">
+                <span class="coin-symbol">TRUMP</span>
+                <span class="coin-pair">TRUMP/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 32 L 25 24 L 40 28 L 60 14 L 75 22 L 95 10" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$1.60</span>
+              <span class="coin-change change-down">-1.9%</span>
+            </div>
+          </div>
+
+          <!-- 4. XTZ -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-xtz">tz</div>
+              <div class="coin-names">
+                <span class="coin-symbol">XTZ</span>
+                <span class="coin-pair">XTZ/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 34 L 30 26 L 50 30 L 70 18 L 95 12" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.23</span>
+              <span class="coin-change change-down">-0.62%</span>
+            </div>
+          </div>
+
+          <!-- 5. ADA -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-ada">⁘</div>
+              <div class="coin-names">
+                <span class="coin-symbol">ADA</span>
+                <span class="coin-pair">ADA/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 28 L 25 24 L 45 22 L 70 16 L 95 10" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.17</span>
+              <span class="coin-change change-up">+1.52%</span>
+            </div>
+          </div>
+
+          <!-- 6. TRX -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-trx">▶</div>
+              <div class="coin-names">
+                <span class="coin-symbol">TRX</span>
+                <span class="coin-pair">TRX/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 22 Q 35 22, 50 18 T 75 14 T 95 18" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.33</span>
+              <span class="coin-change change-zero">0%</span>
+            </div>
+          </div>
+
+          <!-- 7. BNB -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-bnb">❖</div>
+              <div class="coin-names">
+                <span class="coin-symbol">BNB</span>
+                <span class="coin-pair">BNB/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 32 Q 40 30, 60 25 T 80 18 T 95 10" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$571.55</span>
+              <span class="coin-change change-up">+0.6%</span>
+            </div>
+          </div>
+
+          <!-- 8. YFI -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-yfi">🔗</div>
+              <div class="coin-names">
+                <span class="coin-symbol">YFI</span>
+                <span class="coin-pair">YFI/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 30 Q 30 28, 50 20 T 75 16 T 95 8" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$2111.58</span>
+              <span class="coin-change change-up">+1.14%</span>
+            </div>
+          </div>
+
+          <!-- 9. A -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-a">VA</div>
+              <div class="coin-names">
+                <span class="coin-symbol">A</span>
+                <span class="coin-pair">A/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 30 L 30 30 L 50 24 L 70 18 L 95 12" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.07</span>
+              <span class="coin-change change-up">+0.3%</span>
+            </div>
+          </div>
+
+          <!-- 10. MELANIA -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-melania">👩</div>
+              <div class="coin-names">
+                <span class="coin-symbol">MELANIA</span>
+                <span class="coin-pair">MELANIA/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 32 L 20 32 L 35 20 L 55 12 L 75 22 L 95 10" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.08</span>
+              <span class="coin-change change-down">-0.63%</span>
+            </div>
+          </div>
+
+          <!-- 11. ETC -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-etc">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path d="M12 2L5 12L12 16L19 12L12 2ZM12 17L5 13L12 22L19 13L12 17Z"/>
+                </svg>
+              </div>
+              <div class="coin-names">
+                <span class="coin-symbol">ETC</span>
+                <span class="coin-pair">ETC/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 28 L 45 20 L 95 10" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$6.96</span>
+              <span class="coin-change change-up">+0.29%</span>
+            </div>
+          </div>
+
+          <!-- 12. XRP -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-xrp">✕</div>
+              <div class="coin-names">
+                <span class="coin-symbol">XRP</span>
+                <span class="coin-pair">XRP/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 25 L 20 20 L 35 28 L 50 18 L 70 20 L 95 6" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$1.11</span>
+              <span class="coin-change change-up">+2.05%</span>
+            </div>
+          </div>
+
+          <!-- 13. SOL -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-sol">≡</div>
+              <div class="coin-names">
+                <span class="coin-symbol">SOL</span>
+                <span class="coin-pair">SOL/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 30 Q 30 25, 50 18 T 80 12 T 95 6" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$77.41</span>
+              <span class="coin-change change-up">+2.09%</span>
+            </div>
+          </div>
+
+          <!-- 14. USDC -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-usdc">$</div>
+              <div class="coin-names">
+                <span class="coin-symbol">USDC</span>
+                <span class="coin-pair">USDC/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 25 L 35 25 L 60 18 L 95 12" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$1.00</span>
+              <span class="coin-change change-zero">0%</span>
+            </div>
+          </div>
+
+          <!-- 15. LTC -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-ltc">Ł</div>
+              <div class="coin-names">
+                <span class="coin-symbol">LTC</span>
+                <span class="coin-pair">LTC/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 32 L 35 32 L 55 28 L 75 18 L 95 10" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$47.12</span>
+              <span class="coin-change change-down">-0.88%</span>
+            </div>
+          </div>
+
+          <!-- 16. KNC -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-knc">⬡</div>
+              <div class="coin-names">
+                <span class="coin-symbol">KNC</span>
+                <span class="coin-pair">KNC/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 25 L 25 25 L 45 18 L 65 18 L 95 28" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.11</span>
+              <span class="coin-change change-down">-1.1%</span>
+            </div>
+          </div>
+
+          <!-- 17. DOGE -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-doge">Ð</div>
+              <div class="coin-names">
+                <span class="coin-symbol">DOGE</span>
+                <span class="coin-pair">DOGE/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-down">
+                <path d="M5 28 L 25 24 L 45 28 L 65 18 L 95 16" fill="none" stroke="#FF4D4F" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.07</span>
+              <span class="coin-change change-down">-0.68%</span>
+            </div>
+          </div>
+
+          <!-- 18. VET -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-vet">V</div>
+              <div class="coin-names">
+                <span class="coin-symbol">VET</span>
+                <span class="coin-pair">VET/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 26 L 25 26 L 45 20 L 65 24 L 95 14" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.00</span>
+              <span class="coin-change change-up">+0.64%</span>
+            </div>
+          </div>
+
+          <!-- 19. SHIB -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-shib">🐕</div>
+              <div class="coin-names">
+                <span class="coin-symbol">SHIB</span>
+                <span class="coin-pair">SHIB/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 30 L 30 28 L 50 20 L 75 18 L 95 8" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.00</span>
+              <span class="coin-change change-up">+2.42%</span>
+            </div>
+          </div>
+
+          <!-- 20. QTUM -->
+          <div class="coin-row">
+            <div class="coin-info">
+              <div class="coin-icon icon-qtum">⚛</div>
+              <div class="coin-names">
+                <span class="coin-symbol">QTUM</span>
+                <span class="coin-pair">QTUM/USDT</span>
+              </div>
+            </div>
+            <div class="coin-chart">
+              <svg viewBox="0 0 100 40" class="sparkline spark-up">
+                <path d="M5 32 L 35 28 L 65 22 L 95 12" fill="none" stroke="#00D084" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="coin-pricing">
+              <span class="coin-price">$0.72</span>
+              <span class="coin-change change-up">+2.68%</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Fixed at bottom) -->
+    <nav class="bottom-nav">
+      <a href="#home" class="nav-item active" id="tabHome">
+        <div class="nav-icon">
+          <!-- House Icon (Filled/Yellow when active) -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span class="nav-label">Home</span>
+      </a>
+
+      <a href="#trade" class="nav-item" id="tabTrade">
+        <div class="nav-icon">
+          <!-- Zig-zag trend lines with arrows -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <span class="nav-label">Trade</span>
+      </a>
+
+      <a href="#contract" class="nav-item" id="tabContract">
+        <div class="nav-icon">
+          <!-- Bar chart inside rect with arrow -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.8"/>
+            <line x1="7" y1="17" x2="7" y2="13" stroke-width="2"/>
+            <line x1="12" y1="17" x2="12" y2="9" stroke-width="2"/>
+            <line x1="17" y1="17" x2="17" y2="7" stroke-width="2"/>
+            <path d="M7 11L12 7L17 5" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <span class="nav-label">Contract</span>
+      </a>
+
+      <a href="#account" class="nav-item" id="tabAccount">
+        <div class="nav-icon">
+          <!-- Circle with face/user icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1" fill="currentColor"/>
+            <path d="M9.5 15a3.5 3.5 0 0 0 5 0"/>
+          </svg>
+        </div>
+        <span class="nav-label">Account</span>
+      </a>
+
+      <!-- Home Indicator Line for Mobile feel -->
+      <div class="home-indicator"></div>
+    </nav>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

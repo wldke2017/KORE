@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Login – Kore Exchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0b0d13;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Same phone-frame wrapper as main page */
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background-color: #1a1c24;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    /* ── Top bar ── */
+    .login-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px 10px 20px;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      padding: 4px;
+      line-height: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-close:hover { opacity: 0.7; }
+
+    .btn-language {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9aa0b0;
+      padding: 4px;
+      line-height: 0;
+      transition: color 0.2s;
+    }
+    .btn-language:hover { color: #ffffff; }
+
+    /* ── Login Title ── */
+    .login-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      padding: 18px 24px 28px 24px;
+    }
+
+    /* ── Scrollable form body ── */
+    .login-body {
+      flex: 1;
+      padding: 0 24px 40px 24px;
+      overflow-y: auto;
+    }
+
+    /* ── Tab switcher: Email / Phone number ── */
+    .tab-switcher {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid #2b2e3a;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #7b8394;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .tab-btn.active {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Active underline indicator */
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #f7f230;
+      border-radius: 2px 2px 0 0;
+    }
+
+    /* ── Field Groups ── */
+    .field-group {
+      margin-bottom: 22px;
+    }
+
+    .field-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .field-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #23262f;
+      border: 1px solid #2e3140;
+      border-radius: 10px;
+      transition: border-color 0.2s;
+    }
+
+    .field-wrapper:focus-within {
+      border-color: #f7f230;
+    }
+
+    .field-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 16px 14px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #ffffff;
+      width: 100%;
+    }
+
+    .field-input::placeholder {
+      color: #4e5465;
+    }
+
+    /* Clear (×) and Eye toggle buttons inside field */
+    .field-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-right: 12px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5a6075;
+      padding: 2px;
+      line-height: 0;
+      transition: color 0.2s;
+    }
+    .icon-btn:hover { color: #9aa0b0; }
+
+    /* ── Login CTA Button ── */
+    .login-cta {
+      width: 100%;
+      padding: 18px;
+      background-color: #f0a500;
+      color: #111111;
+      font-size: 17px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: filter 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 20px rgba(240, 165, 0, 0.28);
+    }
+
+    .login-cta:hover { filter: brightness(1.07); }
+    .login-cta:active { transform: scale(0.98); filter: brightness(0.96); }
+
+    /* ── Sign up link ── */
+    .signup-row {
+      margin-top: 22px;
+      font-size: 14px;
+      color: #7b8394;
+    }
+
+    .signup-link {
+      color: #00c27a;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .signup-link:hover { opacity: 0.8; }
+
+    /* ── Home Indicator ── */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background-color: #3b4252;
+      border-radius: 2px;
+    }
+
+    /* Phone number tab content (hidden by default) */
+    .phone-content { display: none; }
+    .phone-content.visible { display: block; }
+    .email-content { display: block; }
+    .email-content.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- Top bar with close X and language globe -->
+    <div class="login-topbar">
+      <button class="btn-close" onclick="window.location.href='index.html'" aria-label="Close">
+        <!-- X close icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <button class="btn-language" aria-label="Change language">
+        <!-- Globe icon -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Title -->
+    <h1 class="login-title">Login</h1>
+
+    <!-- Form Body -->
+    <div class="login-body">
+
+      <!-- Tab Switcher -->
+      <div class="tab-switcher">
+        <button class="tab-btn active" id="tabEmail" onclick="switchTab('email')">Email</button>
+        <button class="tab-btn" id="tabPhone" onclick="switchTab('phone')">Phone number</button>
+      </div>
+
+      <!-- EMAIL TAB CONTENT -->
+      <div class="email-content" id="emailContent">
+        <!-- Email Field -->
+        <div class="field-group">
+          <label class="field-label" for="emailInput">Email</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="emailInput"
+              type="email"
+              placeholder="Please enter your email address"
+              autocomplete="email"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('emailInput')" aria-label="Clear email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="field-group">
+          <label class="field-label" for="passwordInput">Password</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="passwordInput"
+              type="password"
+              placeholder="Please enter your password"
+              autocomplete="current-password"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('passwordInput')" aria-label="Clear password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <button class="icon-btn" id="togglePwd" onclick="togglePassword()" aria-label="Toggle password visibility">
+                <!-- Eye-off icon -->
+                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Fund Password (Email tab) -->
+        <div class="field-group">
+          <label class="field-label" for="confirmFundPwdLogin">Confirm fund password</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="confirmFundPwdLogin"
+              type="password"
+              placeholder="Please confirm your funds password"
+              maxlength="6"
+              inputmode="numeric"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmFundPwdLogin')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <button class="icon-btn" onclick="toggleFundPwd('confirmFundPwdLogin','eyeFund1')" aria-label="Toggle visibility">
+                <svg id="eyeFund1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHONE TAB CONTENT -->
+      <div class="phone-content" id="phoneContent">
+        <!-- Phone Field -->
+        <div class="field-group">
+          <label class="field-label" for="phoneInput">Phone number</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="phoneInput"
+              type="tel"
+              placeholder="Please enter your phone number"
+              autocomplete="tel"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('phoneInput')" aria-label="Clear phone">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Field (Phone tab) -->
+        <div class="field-group">
+          <label class="field-label" for="passwordInputPhone">Password</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="passwordInputPhone"
+              type="password"
+              placeholder="Please enter your password"
+              autocomplete="current-password"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('passwordInputPhone')" aria-label="Clear password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <button class="icon-btn" onclick="togglePassword2()" aria-label="Toggle password visibility">
+                <svg id="eyeIcon2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Fund Password (Phone tab) -->
+        <div class="field-group">
+          <label class="field-label" for="confirmFundPwdLoginP">Confirm fund password</label>
+          <div class="field-wrapper">
+            <input
+              class="field-input"
+              id="confirmFundPwdLoginP"
+              type="password"
+              placeholder="Please confirm your funds password"
+              maxlength="6"
+              inputmode="numeric"
+            />
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmFundPwdLoginP')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#3e4255"/>
+                  <line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <button class="icon-btn" onclick="toggleFundPwd('confirmFundPwdLoginP','eyeFund2')" aria-label="Toggle visibility">
+                <svg id="eyeFund2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login CTA Button -->
+      <button class="login-cta" onclick="handleLogin()">Login</button>
+
+      <!-- Sign up row -->
+      <p class="signup-row">
+        Don't have an account yet? <a class="signup-link" href="signup.html">Sign up</a>
+      </p>
+
+    </div>
+
+    <!-- Home indicator pill -->
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    // Tab switcher
+    function switchTab(tab) {
+      const emailContent = document.getElementById('emailContent');
+      const phoneContent = document.getElementById('phoneContent');
+      const tabEmail = document.getElementById('tabEmail');
+      const tabPhone = document.getElementById('tabPhone');
+
+      if (tab === 'email') {
+        emailContent.classList.remove('hidden');
+        emailContent.style.display = 'block';
+        phoneContent.style.display = 'none';
+        tabEmail.classList.add('active');
+        tabPhone.classList.remove('active');
+      } else {
+        emailContent.style.display = 'none';
+        phoneContent.style.display = 'block';
+        tabEmail.classList.remove('active');
+        tabPhone.classList.add('active');
+      }
+    }
+
+    // Clear field
+    function clearField(id) {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.focus(); }
+    }
+
+    // Toggle fund password visibility (generic, used by both tabs)
+    const fundPwdStates = {};
+    function toggleFundPwd(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon  = document.getElementById(iconId);
+      fundPwdStates[inputId] = !fundPwdStates[inputId];
+      const visible = fundPwdStates[inputId];
+      input.type = visible ? 'text' : 'password';
+      icon.innerHTML = visible
+        ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
+        : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`;
+    }
+
+    // Toggle password visibility (email tab)
+    let pwdVisible = false;
+    function togglePassword() {
+      const input = document.getElementById('passwordInput');
+      const icon  = document.getElementById('eyeIcon');
+      pwdVisible = !pwdVisible;
+      input.type = pwdVisible ? 'text' : 'password';
+      icon.innerHTML = pwdVisible
+        ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
+        : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`;
+    }
+
+    // Toggle password visibility (phone tab)
+    let pwdVisible2 = false;
+    function togglePassword2() {
+      const input = document.getElementById('passwordInputPhone');
+      const icon  = document.getElementById('eyeIcon2');
+      pwdVisible2 = !pwdVisible2;
+      input.type = pwdVisible2 ? 'text' : 'password';
+      icon.innerHTML = pwdVisible2
+        ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
+        : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`;
+    }
+
+    // Handle Login click
+    async function handleLogin() {
+      const activeTab = document.getElementById('tabEmail').classList.contains('active') ? 'email' : 'phone';
+      const email = document.getElementById('emailInput')?.value?.trim();
+      const phone = document.getElementById('phoneInput')?.value?.trim();
+      const password = activeTab === 'email' 
+        ? document.getElementById('passwordInput')?.value 
+        : document.getElementById('passwordInputPhone')?.value;
+
+      if (activeTab === 'email' && (!email || !password)) {
+        showError('Please enter email and password.');
+        return;
+      }
+      if (activeTab === 'phone' && (!phone || !password)) {
+        showError('Please enter phone number and password.');
+        return;
+      }
+
+      showError('');
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(activeTab === 'email' ? { email, password } : { phone, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          showError(data.error || 'Login failed.');
+          return;
+        }
+
+        // Store token in localStorage and redirect to index.html
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = 'index.html';
+      } catch (err) {
+        showError('Network error. Please try again.');
+        console.error(err);
+      }
+    }
+
+    function showError(msg) {
+      let el = document.getElementById('loginError');
+      if (!el) {
+        el = document.createElement('p');
+        el.id = 'loginError';
+        el.style.cssText = 'color:#ff4d4f;font-size:13px;margin-top:8px;margin-bottom:12px;text-align:center;';
+        document.querySelector('.login-cta').before(el);
+      }
+      el.textContent = msg;
+    }
+  </script>
+</body>
+</html>
