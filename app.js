@@ -96,22 +96,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Action Buttons Interactions
+  // Action Buttons Interactions (Deposit, Share, Online Service, Withdraw)
   const actionItems = document.querySelectorAll('.action-item');
   actionItems.forEach(item => {
     item.addEventListener('click', () => {
-      const label = item.querySelector('.action-label').innerText;
-      showToast(`${label} feature clicked`);
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        window.location.href = 'login.html';
+      } else {
+        const label = item.querySelector('.action-label').innerText;
+        showToast(`${label} feature selected`);
+      }
     });
   });
-
-  // Login Button – navigation handled via onclick in HTML
 
   // Profile Button Handler
   const profileBtn = document.querySelector('.profile-btn');
   if (profileBtn) {
     profileBtn.addEventListener('click', () => {
-      showToast('Opening Account Profile...');
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        window.location.href = 'login.html';
+      } else {
+        showToast('Opening Account Profile...');
+      }
     });
   }
 
