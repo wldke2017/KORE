@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rate Us – Kore Investment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    :root {
+      --gold: #f0a500;
+      --gold-glow: rgba(240, 165, 0, 0.3);
+      --gold-dim: rgba(240, 165, 0, 0.12);
+      --bg-deep: #0b0d13;
+      --bg-card: #1a1c24;
+      --bg-field: #23262f;
+      --border: #2e3140;
+      --text-muted: #7b8394;
+      --text-dim: #4e5465;
+      --green: #00c27a;
+      --accent-yellow: #f7f230;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      background-color: var(--bg-deep);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Animated background orbs */
+    .bg-orbs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.15;
+      animation: orb-float 8s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #f0a500, transparent);
+      top: -80px; left: -80px;
+      animation-delay: 0s;
+    }
+
+    .orb-2 {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, #f7f230, transparent);
+      bottom: -60px; right: -60px;
+      animation-delay: -4s;
+    }
+
+    .orb-3 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, #00c27a, transparent);
+      top: 40%; left: 60%;
+      animation-delay: -2s;
+    }
+
+    @keyframes orb-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -20px) scale(1.05); }
+      66% { transform: translate(-15px, 15px) scale(0.95); }
+    }
+
+    /* Phone frame */
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background-color: var(--bg-card);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 60px rgba(0,0,0,0.9), 0 0 120px rgba(240,165,0,0.05);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px 10px 20px;
+      flex-shrink: 0;
+    }
+
+    .btn-back {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      color: #ffffff;
+      padding: 8px 10px;
+      line-height: 0;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.1); }
+    .btn-back:active { transform: scale(0.95); }
+
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--gold), #ffd040);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: #111;
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Scrollable body */
+    .review-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 24px 60px;
+      scrollbar-width: none;
+    }
+    .review-body::-webkit-scrollbar { display: none; }
+
+    /* Hero section */
+    .hero {
+      text-align: center;
+      padding: 24px 0 28px;
+    }
+
+    .hero-emoji {
+      font-size: 52px;
+      display: block;
+      margin-bottom: 14px;
+      animation: pulse-emoji 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-emoji {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, var(--gold), var(--accent-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* Main Star Rating */
+    .star-section {
+      background: linear-gradient(135deg, rgba(240,165,0,0.08), rgba(247,242,48,0.04));
+      border: 1px solid rgba(240,165,0,0.2);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .star-section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .stars-main {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .star-main {
+      font-size: 42px;
+      cursor: pointer;
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s;
+      filter: grayscale(1) brightness(0.4);
+      user-select: none;
+    }
+
+    .star-main.hovered,
+    .star-main.selected {
+      filter: grayscale(0) brightness(1);
+      transform: scale(1.2);
+    }
+
+    .star-main.selected {
+      animation: star-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes star-pop {
+      0% { transform: scale(0.8); }
+      60% { transform: scale(1.35); }
+      100% { transform: scale(1.2); }
+    }
+
+    .rating-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gold);
+      min-height: 22px;
+      transition: opacity 0.2s;
+    }
+
+    /* Category Ratings */
+    .categories-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .category-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-field);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .category-item.rated {
+      border-color: rgba(240,165,0,0.35);
+      background: rgba(240,165,0,0.05);
+    }
+
+    .category-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-icon {
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .category-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .category-stars {
+      display: flex;
+      gap: 4px;
+    }
+
+    .cat-star {
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.12s, filter 0.12s;
+      filter: grayscale(1) brightness(0.4);
+      user-select: none;
+    }
+
+    .cat-star.active {
+      filter: grayscale(0) brightness(1);
+    }
+
+    .cat-star:hover {
+      transform: scale(1.25);
+    }
+
+    /* Review Text Area */
+    .review-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .review-textarea {
+      width: 100%;
+      background: var(--bg-field);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 14px;
+      color: #ffffff;
+      resize: none;
+      height: 110px;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+      margin-bottom: 6px;
+    }
+
+    .review-textarea::placeholder { color: var(--text-dim); }
+    .review-textarea:focus { border-color: var(--gold); }
+
+    .char-count {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    /* Tag Pills */
+    .tags-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag-pill {
+      padding: 8px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--bg-field);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .tag-pill.selected {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .tag-pill:hover:not(.selected) {
+      border-color: rgba(255,255,255,0.2);
+      color: #ffffff;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--gold), #ffd040);
+      color: #111111;
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(240,165,0,0.35);
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+      pointer-events: none;
+    }
+
+    .submit-btn:hover { filter: brightness(1.08); box-shadow: 0 8px 30px rgba(240,165,0,0.45); }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Success Overlay */
+    .success-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 10;
+    }
+
+    .success-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .success-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #ffd040);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      margin-bottom: 28px;
+      box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(240,165,0,0.15);
+      animation: success-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes success-pulse {
+      0%, 100% { box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(240,165,0,0.15); }
+      50% { box-shadow: 0 0 60px rgba(240,165,0,0.5), 0 0 120px rgba(240,165,0,0.25); }
+    }
+
+    .success-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .success-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .success-stars {
+      display: flex;
+      gap: 8px;
+      font-size: 32px;
+      margin-bottom: 32px;
+      animation: stars-appear 0.6s ease 0.2s both;
+    }
+
+    @keyframes stars-appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-home {
+      width: 100%;
+      padding: 16px;
+      background: var(--bg-field);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-home:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* Home indicator */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background-color: #3b4252;
+      border-radius: 2px;
+    }
+
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.3);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <button class="btn-back" onclick="window.location.href='login.html'" aria-label="Back to login">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <div class="logo-badge">
+        <div class="logo-icon">K</div>
+        <span class="logo-text">KORE Investment</span>
+      </div>
+      <div style="width:38px"></div>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="review-body" id="reviewBody">
+
+      <!-- Hero -->
+      <div class="hero">
+        <span class="hero-emoji">⭐</span>
+        <h1 class="hero-title">Your Opinion <span>Matters</span></h1>
+        <p class="hero-sub">Help us improve by sharing your experience with KORE Investment. It only takes a minute!</p>
+      </div>
+
+      <!-- Main Star Rating -->
+      <div class="star-section" id="starSection">
+        <p class="star-section-label">Overall Experience</p>
+        <div class="stars-main" id="mainStars" role="group" aria-label="Overall rating">
+          <span class="star-main" data-val="1" onclick="setMainRating(1)" onmouseenter="hoverMain(1)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="2" onclick="setMainRating(2)" onmouseenter="hoverMain(2)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="3" onclick="setMainRating(3)" onmouseenter="hoverMain(3)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="4" onclick="setMainRating(4)" onmouseenter="hoverMain(4)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="5" onclick="setMainRating(5)" onmouseenter="hoverMain(5)" onmouseleave="unhoverMain()">⭐</span>
+        </div>
+        <div class="rating-label" id="ratingLabel">Tap a star to rate</div>
+      </div>
+
+      <!-- Category Ratings -->
+      <p class="categories-title">Rate by Category</p>
+
+      <div class="category-item" id="cat-returns">
+        <div class="category-left">
+          <div class="category-icon">📈</div>
+          <span class="category-name">Returns &amp; Profits</span>
+        </div>
+        <div class="category-stars" id="stars-returns">
+          <span class="cat-star" data-cat="returns" data-val="1" onclick="setCatRating('returns',1)">⭐</span>
+          <span class="cat-star" data-cat="returns" data-val="2" onclick="setCatRating('returns',2)">⭐</span>
+          <span class="cat-star" data-cat="returns" data-val="3" onclick="setCatRating('returns',3)">⭐</span>
+          <span class="cat-star" data-cat="returns" data-val="4" onclick="setCatRating('returns',4)">⭐</span>
+          <span class="cat-star" data-cat="returns" data-val="5" onclick="setCatRating('returns',5)">⭐</span>
+        </div>
+      </div>
+
+      <div class="category-item" id="cat-support">
+        <div class="category-left">
+          <div class="category-icon">🎧</div>
+          <span class="category-name">Customer Support</span>
+        </div>
+        <div class="category-stars" id="stars-support">
+          <span class="cat-star" data-cat="support" data-val="1" onclick="setCatRating('support',1)">⭐</span>
+          <span class="cat-star" data-cat="support" data-val="2" onclick="setCatRating('support',2)">⭐</span>
+          <span class="cat-star" data-cat="support" data-val="3" onclick="setCatRating('support',3)">⭐</span>
+          <span class="cat-star" data-cat="support" data-val="4" onclick="setCatRating('support',4)">⭐</span>
+          <span class="cat-star" data-cat="support" data-val="5" onclick="setCatRating('support',5)">⭐</span>
+        </div>
+      </div>
+
+      <div class="category-item" id="cat-platform">
+        <div class="category-left">
+          <div class="category-icon">📱</div>
+          <span class="category-name">Platform &amp; App</span>
+        </div>
+        <div class="category-stars" id="stars-platform">
+          <span class="cat-star" data-cat="platform" data-val="1" onclick="setCatRating('platform',1)">⭐</span>
+          <span class="cat-star" data-cat="platform" data-val="2" onclick="setCatRating('platform',2)">⭐</span>
+          <span class="cat-star" data-cat="platform" data-val="3" onclick="setCatRating('platform',3)">⭐</span>
+          <span class="cat-star" data-cat="platform" data-val="4" onclick="setCatRating('platform',4)">⭐</span>
+          <span class="cat-star" data-cat="platform" data-val="5" onclick="setCatRating('platform',5)">⭐</span>
+        </div>
+      </div>
+
+      <div class="category-item" id="cat-security">
+        <div class="category-left">
+          <div class="category-icon">🔒</div>
+          <span class="category-name">Security &amp; Trust</span>
+        </div>
+        <div class="category-stars" id="stars-security">
+          <span class="cat-star" data-cat="security" data-val="1" onclick="setCatRating('security',1)">⭐</span>
+          <span class="cat-star" data-cat="security" data-val="2" onclick="setCatRating('security',2)">⭐</span>
+          <span class="cat-star" data-cat="security" data-val="3" onclick="setCatRating('security',3)">⭐</span>
+          <span class="cat-star" data-cat="security" data-val="4" onclick="setCatRating('security',4)">⭐</span>
+          <span class="cat-star" data-cat="security" data-val="5" onclick="setCatRating('security',5)">⭐</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Tag pills -->
+      <span class="tags-label">What stood out? (Select all that apply)</span>
+      <div class="tags-grid" id="tagsGrid">
+        <span class="tag-pill" onclick="toggleTag(this)">💰 Great Returns</span>
+        <span class="tag-pill" onclick="toggleTag(this)">⚡ Fast Withdrawals</span>
+        <span class="tag-pill" onclick="toggleTag(this)">🤝 Trustworthy</span>
+        <span class="tag-pill" onclick="toggleTag(this)">📊 Clear Reports</span>
+        <span class="tag-pill" onclick="toggleTag(this)">🛡️ Secure</span>
+        <span class="tag-pill" onclick="toggleTag(this)">💬 Responsive Support</span>
+        <span class="tag-pill" onclick="toggleTag(this)">🌍 Global Access</span>
+        <span class="tag-pill" onclick="toggleTag(this)">📱 Easy to Use</span>
+      </div>
+
+      <!-- Written review -->
+      <span class="review-label">Tell us more (optional)</span>
+      <textarea
+        class="review-textarea"
+        id="reviewText"
+        placeholder="Share your experience with KORE Investment. What did you love? What can we improve?"
+        maxlength="400"
+        oninput="updateCharCount()"
+      ></textarea>
+      <div class="char-count"><span id="charCount">0</span>/400</div>
+
+      <!-- Submit -->
+      <button class="submit-btn" id="submitBtn" onclick="submitReview(event)">
+        Submit My Review ✨
+      </button>
+
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-circle">🏆</div>
+      <div class="success-stars" id="successStars">⭐⭐⭐⭐⭐</div>
+      <h2 class="success-title">Thank You!</h2>
+      <p class="success-sub">Your review has been submitted.<br>We truly appreciate your feedback and will use it to make KORE Investment even better.</p>
+      <button class="btn-home" onclick="window.location.href='login.html'">
+        Back to Login
+      </button>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    let mainRating = 0;
+    const catRatings = { returns: 0, support: 0, platform: 0, security: 0 };
+    const ratingLabels = ['', 'Poor 😞', 'Fair 😐', 'Good 🙂', 'Great 😊', 'Excellent 🤩'];
+
+    function hoverMain(val) {
+      const stars = document.querySelectorAll('.star-main');
+      stars.forEach(s => {
+        const sv = parseInt(s.dataset.val);
+        if (sv <= val) { s.classList.add('hovered'); s.classList.remove('selected'); }
+        else { s.classList.remove('hovered', 'selected'); }
+      });
+      document.getElementById('ratingLabel').textContent = ratingLabels[val];
+    }
+
+    function unhoverMain() {
+      const stars = document.querySelectorAll('.star-main');
+      stars.forEach(s => {
+        s.classList.remove('hovered');
+        if (parseInt(s.dataset.val) <= mainRating) s.classList.add('selected');
+      });
+      document.getElementById('ratingLabel').textContent = mainRating ? ratingLabels[mainRating] : 'Tap a star to rate';
+    }
+
+    function setMainRating(val) {
+      mainRating = val;
+      const stars = document.querySelectorAll('.star-main');
+      stars.forEach(s => {
+        s.classList.remove('hovered');
+        if (parseInt(s.dataset.val) <= val) s.classList.add('selected');
+        else s.classList.remove('selected');
+      });
+      document.getElementById('ratingLabel').textContent = ratingLabels[val];
+      document.getElementById('starSection').style.borderColor = 'rgba(240,165,0,0.5)';
+      if (navigator.vibrate) navigator.vibrate(30);
+    }
+
+    function setCatRating(cat, val) {
+      catRatings[cat] = val;
+      const stars = document.getElementById('stars-' + cat).querySelectorAll('.cat-star');
+      stars.forEach(s => {
+        if (parseInt(s.dataset.val) <= val) s.classList.add('active');
+        else s.classList.remove('active');
+      });
+      document.getElementById('cat-' + cat).classList.add('rated');
+      if (navigator.vibrate) navigator.vibrate(20);
+    }
+
+    function toggleTag(el) {
+      el.classList.toggle('selected');
+    }
+
+    function updateCharCount() {
+      document.getElementById('charCount').textContent = document.getElementById('reviewText').value.length;
+    }
+
+    async function submitReview(e) {
+      if (mainRating === 0) {
+        const section = document.getElementById('starSection');
+        section.style.borderColor = 'rgba(240,80,80,0.7)';
+        section.style.background = 'rgba(240,80,80,0.05)';
+        setTimeout(() => {
+          section.style.borderColor = 'rgba(240,165,0,0.2)';
+          section.style.background = 'linear-gradient(135deg, rgba(240,165,0,0.08), rgba(247,242,48,0.04))';
+        }, 1200);
+        document.getElementById('ratingLabel').style.color = '#ff6b6b';
+        document.getElementById('ratingLabel').textContent = 'Please select a rating first!';
+        setTimeout(() => {
+          document.getElementById('ratingLabel').style.color = 'var(--gold)';
+          document.getElementById('ratingLabel').textContent = 'Tap a star to rate';
+        }, 1500);
+        return;
+      }
+
+      // Ripple effect
+      const btn = document.getElementById('submitBtn');
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-effect';
+      ripple.style.left = (e.clientX - rect.left - 30) + 'px';
+      ripple.style.top = (e.clientY - rect.top - 30) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const selectedTags = [...document.querySelectorAll('.tag-pill.selected')].map(t => t.textContent.trim());
+
+      const payload = {
+        overall: mainRating,
+        categories: catRatings,
+        tags: selectedTags,
+        review: document.getElementById('reviewText').value.trim()
+      };
+
+      try {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+        await fetch(API_BASE + '/api/review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (_) { /* silently continue */ }
+
+      setTimeout(() => {
+        document.getElementById('successStars').textContent = '⭐'.repeat(mainRating);
+        document.getElementById('successOverlay').classList.add('visible');
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>

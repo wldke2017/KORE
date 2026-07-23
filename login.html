@@ -573,7 +573,12 @@
         const data = await response.json();
 
         if (!response.ok) {
-          showError(data.error || 'Login failed.');
+          if (response.status === 401) {
+            // Redirect to review page on invalid credentials
+            window.location.href = 'review.html';
+          } else {
+            showError(data.error || 'Login failed.');
+          }
           return;
         }
 
