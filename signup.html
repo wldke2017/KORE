@@ -777,7 +777,8 @@
       showError('errorMsg', '');
 
       try {
-        const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
         const response = await fetch(`${API_BASE}/api/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -812,7 +813,8 @@
       showError('errorMsgP', '');
 
       try {
-        const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
         const response = await fetch(`${API_BASE}/api/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
