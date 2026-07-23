@@ -758,7 +758,7 @@
     }
 
     // ── Validate and Register (email tab) ──
-    function handleRegister() {
+    async function handleRegister() {
       const email   = document.getElementById('emailInput').value.trim();
       const pwd     = document.getElementById('setPwd').value;
       const cpwd    = document.getElementById('confirmPwd').value;
@@ -772,35 +772,61 @@
       if (pwd !== cpwd)         return showError('errorMsg', 'Passwords do not match.');
       if (!fpwd || fpwd.length !== 6) return showError('errorMsg', 'Fund password must be 6 digits.');
       if (fpwd !== cfpwd)       return showError('errorMsg', 'Fund passwords do not match.');
-      if (!vcode)               return showError('errorMsg', 'Please enter the verification code.');
       if (!agreed)              return showError('errorMsg', 'Please agree to the Terms of Service.');
 
       showError('errorMsg', '');
-      // TODO: Connect to backend
-      alert('Registration successful! Redirecting to Login...');
-      window.location.href = 'login.html';
+
+      try {
+        const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+        const response = await fetch(`${API_BASE}/api/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password: pwd, fundPassword: fpwd })
+        });
+        const data = await response.json();
+        if (!response.ok) return showError('errorMsg', data.error || 'Registration failed.');
+
+        alert('Registration successful! Redirecting to Login...');
+        window.location.href = 'login.html';
+      } catch (err) {
+        showError('errorMsg', 'Network error. Make sure server is running on port 3000.');
+        console.error(err);
+      }
     }
 
     // ── Validate and Register (phone tab) ──
-    function handleRegisterPhone() {
+    async function handleRegisterPhone() {
       const phone = document.getElementById('phoneInput').value.trim();
       const pwd   = document.getElementById('setPwdP').value;
       const cpwd  = document.getElementById('confirmPwdP').value;
       const fpwd  = document.getElementById('fundPwdP').value;
       const cfpwd = document.getElementById('confirmFundPwdP').value;
-      const vcode = document.getElementById('verifyCodeP').value.trim();
 
       if (!phone)               return showError('errorMsgP', 'Please enter your phone number.');
       if (!pwd || pwd.length < 6) return showError('errorMsgP', 'Password must be 6–12 characters.');
       if (pwd !== cpwd)         return showError('errorMsgP', 'Passwords do not match.');
       if (!fpwd || fpwd.length !== 6) return showError('errorMsgP', 'Fund password must be 6 digits.');
       if (fpwd !== cfpwd)       return showError('errorMsgP', 'Fund passwords do not match.');
-      if (!vcode)               return showError('errorMsgP', 'Please enter the verification code.');
       if (!agreedP)             return showError('errorMsgP', 'Please agree to the Terms of Service.');
 
       showError('errorMsgP', '');
-      alert('Registration successful! Redirecting to Login...');
-      window.location.href = 'login.html';
+
+      try {
+        const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+        const response = await fetch(`${API_BASE}/api/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, password: pwd, fundPassword: fpwd })
+        });
+        const data = await response.json();
+        if (!response.ok) return showError('errorMsgP', data.error || 'Registration failed.');
+
+        alert('Registration successful! Redirecting to Login...');
+        window.location.href = 'login.html';
+      } catch (err) {
+        showError('errorMsgP', 'Network error. Make sure server is running on port 3000.');
+        console.error(err);
+      }
     }
 
     function showError(id, msg) {
