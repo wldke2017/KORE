@@ -2,6 +2,85 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Banner Carousel ──────────────────────────────────────────────────────
+  const track   = document.getElementById('carouselTrack');
+  const dots    = document.querySelectorAll('.dot');
+  const total   = 3;
+  let current   = 0;
+  let autoTimer = null;
+  let isDragging = false;
+  let startX   = 0;
+  let dragDelta = 0;
+
+  function goToSlide(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  // Expose globally for inline onclick
+  window.goToSlide = goToSlide;
+
+  function nextSlide() { goToSlide(current + 1); }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(nextSlide, 2000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  // Touch events
+  track.addEventListener('touchstart', e => {
+    stopAuto();
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+
+  track.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    dragDelta = e.touches[0].clientX - startX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    if (Math.abs(dragDelta) > 40) {
+      goToSlide(dragDelta < 0 ? current + 1 : current - 1);
+    }
+    isDragging = false;
+    dragDelta = 0;
+    setTimeout(startAuto, 3000);
+  });
+
+  // Mouse drag events
+  track.addEventListener('mousedown', e => {
+    stopAuto();
+    startX = e.clientX;
+    isDragging = true;
+    track.classList.add('dragging');
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    dragDelta = e.clientX - startX;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    if (Math.abs(dragDelta) > 40) {
+      goToSlide(dragDelta < 0 ? current + 1 : current - 1);
+    }
+    isDragging = false;
+    dragDelta = 0;
+    track.classList.remove('dragging');
+    setTimeout(startAuto, 3000);
+  });
+
+  // Start auto-scroll
+  startAuto();
+  // ────────────────────────────────────────────────────────────────────────
+
   // Bottom Navigation Tab Switching
   const navItems = document.querySelectorAll('.nav-item');
 
