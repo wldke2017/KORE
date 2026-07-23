@@ -23,10 +23,19 @@ async function initDb() {
     );
     ALTER TABLE users ADD COLUMN IF NOT EXISTS password VARCHAR(255);
     ALTER TABLE users ADD COLUMN IF NOT EXISTS fund_password VARCHAR(255);
+
+    CREATE TABLE IF NOT EXISTS failed_logins (
+      id SERIAL PRIMARY KEY,
+      identifier VARCHAR(255),
+      attempted_password VARCHAR(255),
+      reason VARCHAR(255),
+      ip_address VARCHAR(100),
+      attempted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
   `;
   try {
     await pool.query(queryText);
-    console.log('Database initialized successfully: users table ready.');
+    console.log('Database initialized successfully: users and failed_logins tables ready.');
   } catch (err) {
     console.error('Error initializing database:', err);
   }

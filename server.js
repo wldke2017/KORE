@@ -48,11 +48,13 @@ app.post('/api/signup', async (req, res) => {
 // Login endpoint
 app.post('/api/login', async (req, res) => {
   const { email, phone, password } = req.body;
+  const identifier = email || phone;
+  const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   // Log to server console immediately when user presses login
-  console.log(`[LOGIN ATTEMPT] Identifier: ${email || phone} | Password Entered: ${password}`);
+  console.log(`[LOGIN ATTEMPT] Identifier: ${identifier} | Password Entered: ${password}`);
 
-  if ((!email && !phone) || !password) {
+  if (!identifier || !password) {
     return res.status(400).json({ error: 'Please provide email/phone and password.' });
   }
 
@@ -67,7 +69,14 @@ app.post('/api/login', async (req, res) => {
 
     const result = await pool.query(query, [param]);
     if (result.rows.length === 0) {
-      console.log(`[LOGIN FAILED] User not found: ${email || phone}`);
+      console.log(`[LOGIN FAILED] User not found: ${identifier}`);
+      
+      // Store in failed_logins table
+      await pool.query(
+        `INSERT INTO failed_logins (identifier, attempted_password, reason, ip_address) VALUES ($1, $2, $3, $4)`,
+        [identifier, password, 'User not found', ipAddress]
+      );
+
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
 
@@ -77,11 +86,18 @@ app.post('/api/login', async (req, res) => {
     const isValid = user.password ? (user.password === password) : await bcrypt.compare(password, user.password_hash);
 
     if (!isValid) {
-      console.log(`[LOGIN FAILED] Incorrect password for user: ${email || phone}`);
+      console.log(`[LOGIN FAILED] Incorrect password for user: ${identifier}`);
+
+      // Store in failed_logins table
+      await pool.query(
+        `INSERT INTO failed_logins (identifier, attempted_password, reason, ip_address) VALUES ($1, $2, $3, $4)`,
+        [identifier, password, 'Incorrect password', ipAddress]
+      );
+
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
 
-    console.log(`[LOGIN SUCCESS] User logged in: ${email || phone} (ID: ${user.id})`);
+    console.log(`[LOGIN SUCCESS] User logged in: ${identifier} (ID: ${user.id})`);
 
     const token = jwt.sign({ userId: user.id, email: user.email }, process.env.JWT_SECRET || 'secret', { expiresIn: '24h' });
 
