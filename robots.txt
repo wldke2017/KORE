@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://korelogin.site/sitemap.xml
