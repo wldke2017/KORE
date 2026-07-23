@@ -198,57 +198,72 @@ body {
 
 .promo-content {
   z-index: 2;
+  flex: 1;
 }
 
 .promo-brand {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .promo-brand-text {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 2px;
   color: #ffffff;
 }
 
-.promo-title {
-  font-size: 22px;
-  font-weight: 800;
+/* VIP Card specific styles */
+.vip-card {
+  background: linear-gradient(145deg, #0e1218 0%, #0c1016 50%, #111826 100%);
+  border: 1px solid #1e2a3a;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), inset 0 0 60px rgba(0, 120, 80, 0.04);
+}
+
+.vip-title {
+  font-size: 20px;
+  font-weight: 900;
   color: #ffffff;
-  margin-bottom: 8px;
-  line-height: 1.1;
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
 
-.promo-desc {
-  font-size: 12px;
-  font-weight: 400;
-  color: #b0b6c5;
-  line-height: 1.5;
-  margin-bottom: 4px;
-}
-
-.promo-desc strong {
-  font-weight: 700;
-  color: #d8dde8;
-}
-
-.promo-highlight {
+.vip-desc {
   font-size: 13px;
-  font-weight: 700;
-  font-style: italic;
-  color: #ffffff;
-  letter-spacing: 0.2px;
-  margin-top: 2px;
+  font-weight: 400;
+  color: #8a9ab0;
+  margin-bottom: 2px;
 }
 
-.promo-graphic {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.vip-desc strong {
+  font-weight: 700;
+  color: #00d47a;
+}
+
+.vip-sub {
+  font-size: 12px;
+  color: #8a9ab0;
+  margin-bottom: 8px;
+}
+
+.vip-rate {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ccd4e0;
+}
+
+.vip-rate-num {
+  font-size: 22px;
+  font-weight: 900;
+  color: #f7f230;
+  margin-left: 2px;
+}
+
+.vip-graphic {
+  flex-shrink: 0;
+  animation: float 4s ease-in-out infinite;
 }
 
 .neon-cube,
@@ -260,6 +275,7 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+
 
 /* ==========================================================================
    Market Section
