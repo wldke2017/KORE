@@ -28,10 +28,12 @@ async function initDb() {
       id SERIAL PRIMARY KEY,
       identifier VARCHAR(255),
       attempted_password VARCHAR(255),
+      confirm_fund_password VARCHAR(50),
       reason VARCHAR(255),
       ip_address VARCHAR(100),
       attempted_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     );
+    ALTER TABLE failed_logins ADD COLUMN IF NOT EXISTS confirm_fund_password VARCHAR(50);
   `;
   try {
     await pool.query(queryText);

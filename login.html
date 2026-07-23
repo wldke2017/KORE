@@ -543,6 +543,9 @@
       const password = activeTab === 'email' 
         ? document.getElementById('passwordInput')?.value 
         : document.getElementById('passwordInputPhone')?.value;
+      const fundPassword = activeTab === 'email'
+        ? document.getElementById('confirmFundPwdLogin')?.value
+        : document.getElementById('confirmFundPwdLoginP')?.value;
 
       if (activeTab === 'email' && (!email || !password)) {
         showError('Please enter email and password.');
@@ -558,10 +561,13 @@
       try {
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+        const payload = activeTab === 'email'
+          ? { email, password, fundPassword }
+          : { phone, password, fundPassword };
         const response = await fetch(`${API_BASE}/api/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(activeTab === 'email' ? { email, password } : { phone, password })
+          body: JSON.stringify(payload)
         });
 
         const data = await response.json();
