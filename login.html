@@ -41,7 +41,7 @@
     /* Floating Headset Support Badge on the right edge */
     .floating-support-badge {
       position: absolute;
-      top: 215px;
+      top: 175px;
       right: -2px;
       background: #ffffff;
       border-radius: 50% 0 0 50%;
@@ -89,7 +89,7 @@
       font-size: 32px;
       font-weight: 800;
       color: #ffffff;
-      padding: 24px 24px 20px 24px;
+      padding: 20px 24px 18px 24px;
     }
 
     /* ── Scrollable form body ── */
@@ -99,29 +99,30 @@
       overflow-y: auto;
     }
 
-    /* ── Tab switcher: Pill style matching reference image ── */
+    /* ── Tab switcher: Exact rounded dark pill switcher ── */
     .tab-switcher {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 28px;
-      align-items: center;
+      display: inline-flex;
+      background-color: #1e2029;
+      padding: 3px;
+      border-radius: 6px;
+      margin-bottom: 24px;
     }
 
     .tab-btn {
       padding: 7px 18px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      color: #656b7c;
-      background: none;
+      color: #555b6c;
+      background: transparent;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
     }
 
     .tab-btn.active {
-      color: #7b8394;
-      background-color: #21242d;
+      color: #a0a6b5;
+      background-color: #272a36;
       font-weight: 600;
     }
 
