@@ -12,16 +12,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Reset & mobile responsive base */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
-      background-color: #0b0d13;
+      background-color: #090a0f;
       color: #ffffff;
       display: flex;
       justify-content: center;
@@ -29,17 +30,25 @@
       min-height: 100vh;
     }
 
-    /* Same phone-frame wrapper as main page */
+    /* App container - standard mobile container on desktop, fluid 100% on mobile screens */
     .app-container {
       width: 100%;
       max-width: 440px;
       height: 100vh;
-      background-color: #15171e;
+      height: 100dvh;
+      background-color: #12141b;
       position: relative;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
       overflow: hidden;
+    }
+
+    @media (max-width: 440px) {
+      .app-container {
+        max-width: 100%;
+        box-shadow: none;
+      }
     }
 
     /* ── Top bar ── */
@@ -47,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 20px 0 20px;
+      padding: 20px 22px 0 22px;
     }
 
     .btn-close {
@@ -57,15 +66,16 @@
       color: #ffffff;
       padding: 0;
       line-height: 0;
+      opacity: 0.9;
       transition: opacity 0.2s;
     }
-    .btn-close:hover { opacity: 0.7; }
+    .btn-close:hover { opacity: 1; }
 
     .btn-language {
       background: none;
       border: none;
       cursor: pointer;
-      color: #8c93a4;
+      color: #72798c;
       padding: 0;
       line-height: 0;
       transition: color 0.2s;
@@ -74,34 +84,36 @@
 
     /* ── Login Title ── */
     .login-title {
-      font-size: 30px;
-      font-weight: 800;
+      font-size: 26px;
+      font-weight: 700;
       color: #ffffff;
-      padding: 24px 20px 20px 20px;
+      padding: 24px 22px 18px 22px;
       margin: 0;
+      letter-spacing: -0.2px;
     }
 
     /* ── Scrollable form body ── */
     .login-body {
       flex: 1;
-      padding: 0 20px 40px 20px;
+      padding: 0 22px 40px 22px;
       overflow-y: auto;
     }
 
-    /* ── Tab switcher: Exact rounded dark pill switcher ── */
+    /* ── Tab switcher: Rounded segment matching left image ── */
     .tab-switcher {
       display: inline-flex;
-      background-color: #1e2029;
+      background-color: #1a1c24;
       padding: 3px;
       border-radius: 6px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
+      border: 1px solid #232530;
     }
 
     .tab-btn {
-      padding: 7px 18px;
+      padding: 6px 16px;
       font-size: 13px;
       font-weight: 500;
-      color: #555b6c;
+      color: #4a5061;
       background: transparent;
       border: none;
       border-radius: 4px;
@@ -110,21 +122,21 @@
     }
 
     .tab-btn.active {
-      color: #a0a6b5;
-      background-color: #272a36;
+      color: #8c93a4;
+      background-color: #232631;
       font-weight: 600;
     }
 
     /* ── Field Groups ── */
     .field-group {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .field-label {
       font-size: 13px;
       font-weight: 600;
       color: #ffffff;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       display: block;
     }
 
@@ -132,14 +144,15 @@
       position: relative;
       display: flex;
       align-items: center;
-      background-color: #1e2028;
-      border: 1px solid #272a36;
+      background-color: #1a1c24;
+      border: 1px solid #242733;
       border-radius: 8px;
+      height: 46px;
       transition: border-color 0.2s;
     }
 
     .field-wrapper:focus-within {
-      border-color: #eba310;
+      border-color: #e2990d;
     }
 
     .field-input {
@@ -147,15 +160,17 @@
       background: none;
       border: none;
       outline: none;
-      padding: 13px 14px;
+      padding: 0 14px;
       font-size: 13px;
       font-weight: 400;
       color: #ffffff;
       width: 100%;
+      height: 100%;
     }
 
     .field-input::placeholder {
-      color: #4b5060;
+      color: #3f4454;
+      font-size: 13px;
     }
 
     /* Clear (×) and Eye toggle buttons inside field */
@@ -170,7 +185,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      color: #525768;
+      color: #4a5061;
       padding: 2px;
       line-height: 0;
       transition: color 0.2s;
@@ -180,17 +195,20 @@
     /* ── Login CTA Button ── */
     .login-cta {
       width: 100%;
-      padding: 14px;
-      background-color: #eba310;
+      height: 46px;
+      background-color: #e59b0b;
       color: #111111;
       font-size: 15px;
       font-weight: 700;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 8px;
+      margin-top: 6px;
       transition: filter 0.2s ease, transform 0.1s ease;
       box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .login-cta:hover { filter: brightness(1.05); }
@@ -198,7 +216,7 @@
 
     /* ── Sign up link ── */
     .signup-row {
-      margin-top: 24px;
+      margin-top: 20px;
       font-size: 13px;
       color: #ffffff;
       font-weight: 500;
