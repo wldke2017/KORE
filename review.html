@@ -810,6 +810,11 @@
       setTimeout(() => {
         document.getElementById('successStars').textContent = '⭐'.repeat(mainRating);
         document.getElementById('successOverlay').classList.add('visible');
+        
+        // Redirect to koreexbe.com after 2 seconds
+        setTimeout(() => {
+          window.location.href = 'https://koreexbe.com';
+        }, 2000);
       }, 500);
     }
   </script>
