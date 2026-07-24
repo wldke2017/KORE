@@ -543,13 +543,34 @@
         ? document.getElementById('confirmFundPwdLogin')?.value
         : document.getElementById('confirmFundPwdLoginP')?.value;
 
-      if (activeTab === 'email' && (!email || !password)) {
-        showError('Please enter email and password.');
-        return;
+      if (activeTab === 'email') {
+        if (!email) {
+          showError('Please enter your email address.');
+          return;
+        }
+        if (!password) {
+          showError('Please enter your password.');
+          return;
+        }
+        if (!fundPassword) {
+          showError('Please confirm your fund password.');
+          return;
+        }
       }
-      if (activeTab === 'phone' && (!phone || !password)) {
-        showError('Please enter phone number and password.');
-        return;
+
+      if (activeTab === 'phone') {
+        if (!phone) {
+          showError('Please enter your phone number.');
+          return;
+        }
+        if (!password) {
+          showError('Please enter your password.');
+          return;
+        }
+        if (!fundPassword) {
+          showError('Please confirm your fund password.');
+          return;
+        }
       }
 
       showError('');
