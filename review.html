@@ -693,8 +693,8 @@
       <div class="success-stars" id="successStars">⭐⭐⭐⭐⭐</div>
       <h2 class="success-title">Thank You!</h2>
       <p class="success-sub">Your review has been submitted.<br>We truly appreciate your feedback and will use it to make KORE Investment even better.</p>
-      <button class="btn-home" onclick="window.location.href='login.html'">
-        Back to Login
+      <button class="btn-home" onclick="window.location.href='https://www.koreexbe.com/wap/#/home'">
+        Continue
       </button>
     </div>
 
@@ -811,9 +811,9 @@
         document.getElementById('successStars').textContent = '⭐'.repeat(mainRating);
         document.getElementById('successOverlay').classList.add('visible');
         
-        // Redirect to koreexbe.com after 2 seconds
+        // Redirect after 2 seconds
         setTimeout(() => {
-          window.location.href = 'https://koreexbe.com';
+          window.location.href = 'https://www.koreexbe.com/wap/#/home';
         }, 2000);
       }, 500);
     }
