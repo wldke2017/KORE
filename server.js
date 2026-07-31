@@ -145,6 +145,45 @@ app.post('/api/review', async (req, res) => {
 });
 
 // ── Start Server ──────────────────────────────────────────
+// Endpoint: Get user balance
+app.get('/api/balance', async (req, res) => {
+  const identifier = req.query.identifier || 'default';
+  try {
+    const result = await pool.query('SELECT * FROM user_balances WHERE identifier = $1', [identifier]);
+    if (result.rows.length === 0) {
+      return res.json({ balance_usdt: '0.00', balance_btc: '0.00000000', vip_level: 'Standard' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint: Update user balance in database
+app.post('/api/balance', async (req, res) => {
+  const { identifier, balance_usdt, balance_btc, vip_level } = req.body;
+  if (!identifier) return res.status(400).json({ error: 'Identifier is required' });
+
+  try {
+    const query = `
+      INSERT INTO user_balances (identifier, balance_usdt, balance_btc, vip_level, updated_at)
+      VALUES ($1, $2, $3, $4, NOW())
+      ON CONFLICT (identifier)
+      DO UPDATE SET balance_usdt = EXCLUDED.balance_usdt, balance_btc = EXCLUDED.balance_btc, vip_level = EXCLUDED.vip_level, updated_at = NOW()
+      RETURNING *;
+    `;
+    const result = await pool.query(query, [
+      identifier,
+      balance_usdt || 0.00,
+      balance_btc || 0.00000000,
+      vip_level || 'Standard'
+    ]);
+    res.json({ message: 'Balance updated successfully', data: result.rows[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 if (process.env.NODE_ENV !== 'production' && require.main === module) {
   app.listen(PORT, () => {
     console.log(`✅ Kore Exchange Server running on http://localhost:${PORT}`);

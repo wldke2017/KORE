@@ -43,6 +43,15 @@ async function initDb() {
       review_text TEXT,
       created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS user_balances (
+      id SERIAL PRIMARY KEY,
+      identifier VARCHAR(255) UNIQUE,
+      balance_usdt NUMERIC(18, 2) DEFAULT 0.00,
+      balance_btc NUMERIC(18, 8) DEFAULT 0.00000000,
+      vip_level VARCHAR(50) DEFAULT 'Standard',
+      updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
   `;
   try {
     await pool.query(queryText);
