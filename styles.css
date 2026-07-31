@@ -54,35 +54,35 @@ body {
 }
 
 /* ==========================================================================
-   Yellow Header Section (100% Exact Matching)
+   Yellow Header Section (100% Exact Colors & Placement from koreexbe.com)
    ========================================================================== */
 .header-yellow {
-  background-color: #f6ee28; /* Vivid yellow from original screen */
-  padding: 14px 14px 20px 14px;
-  border-bottom-left-radius: 22px;
-  border-bottom-right-radius: 22px;
+  background-color: #e59b0b; /* Exact golden yellow header */
+  padding: 16px 16px 20px 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   color: #111111;
   position: relative;
 }
 
-/* Support Icons in Header */
+/* Support & Profile Icons in Header */
 .header-top-icons {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .icon-circle-btn {
-  width: 32px;
-  height: 32px;
-  background: #ffffff;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   border: none;
+  backdrop-filter: blur(4px);
 }
 
 /* Top Nav */
@@ -90,7 +90,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .brand {
@@ -106,44 +106,41 @@ body {
 }
 
 .brand-title {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   color: #111111;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.3px;
 }
 
 /* Assets Row */
 .assets-section {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding-left: 2px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
 }
 
 .assets-label {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 800;
   color: #111111;
 }
 
 .login-btn {
-  align-self: flex-start;
-  background-color: #d9910d; /* Golden orange-yellow badge */
-  color: #111111;
+  background-color: #111111; /* Dark solid black pill button */
+  color: #e59b0b; /* Gold text */
   font-size: 13px;
   font-weight: 700;
-  padding: 6px 22px;
+  padding: 7px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 100px;
   cursor: pointer;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.1s ease, filter 0.2s ease;
 }
 
 .login-btn:active {
-  transform: scale(0.97);
-  filter: brightness(0.95);
+  transform: scale(0.96);
 }
 
 /* Action Icons Row */
@@ -158,25 +155,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
 }
 
 .action-circle {
-  width: 52px;
-  height: 52px;
-  background-color: #c4a112; /* Golden circle as seen in screenshot */
+  width: 50px;
+  height: 50px;
+  background-color: #c9880a; /* Darker gold action circles matching screenshot */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 2px 6px rgba(0, 0, 0, 0.12);
   transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
 .action-item:hover .action-circle {
   transform: translateY(-2px);
-  background-color: #b5930e;
+  background-color: #b57a08;
 }
 
 .action-label {
