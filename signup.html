@@ -4,252 +4,836 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Register – Kore Exchange</title>
-  <meta name="description" content="Create your Kore Exchange account. Join millions of traders worldwide for live crypto trading and market signals.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #0b0d13;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Phone frame wrapper */
+    .app-container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background-color: #1a1c24;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+
+    /* ── Top Bar ── */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px 10px 20px;
+      flex-shrink: 0;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      padding: 4px;
+      line-height: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-close:hover { opacity: 0.7; }
+
+    .btn-language {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9aa0b0;
+      padding: 4px;
+      line-height: 0;
+      transition: color 0.2s;
+    }
+    .btn-language:hover { color: #ffffff; }
+
+    /* ── Page Title ── */
+    .page-title {
+      font-size: 30px;
+      font-weight: 800;
+      color: #ffffff;
+      padding: 14px 24px 20px 24px;
+      flex-shrink: 0;
+    }
+
+    /* ── Scrollable Body ── */
+    .page-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 20px 60px 20px;
+      scrollbar-width: thin;
+      scrollbar-color: #2a2e3d transparent;
+    }
+    .page-body::-webkit-scrollbar { width: 4px; }
+    .page-body::-webkit-scrollbar-thumb {
+      background: #2a2e3d;
+      border-radius: 4px;
+    }
+
+    /* ── Tab Switcher ── */
+    .tab-switcher {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #272a35;
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #f7f230;
+      border-radius: 2px 2px 0 0;
+    }
+
+    /* ── Field Groups ── */
+    .field-group {
+      margin-bottom: 18px;
+    }
+
+    .field-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e8eaf0;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* Standard Input Field */
+    .field-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #22252f;
+      border: 1px solid #2c2f3e;
+      border-radius: 10px;
+      transition: border-color 0.2s;
+      min-height: 52px;
+    }
+
+    .field-wrapper:focus-within {
+      border-color: #f7f230;
+    }
+
+    /* Invitation code has slightly darker bg */
+    .field-wrapper.darker {
+      background-color: #1c1f29;
+      border-color: #252836;
+    }
+
+    /* Verification code special style – no border box, single-line with "Send" */
+    .field-wrapper.verify-style {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #2c2f3e;
+      border-radius: 0;
+      padding: 0;
+      min-height: 48px;
+    }
+
+    .field-wrapper.verify-style:focus-within {
+      border-color: #f7f230;
+      border-bottom-color: #f7f230;
+    }
+
+    .field-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 14px 12px;
+      font-size: 15px;
+      font-weight: 400;
+      color: #c8ccd8;
+      width: 100%;
+    }
+
+    .field-input::placeholder {
+      color: #4a5068;
+    }
+
+    .field-wrapper.verify-style .field-input {
+      padding-left: 0;
+      color: #9aa0b0;
+    }
+
+    /* Action icons inside field */
+    .field-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #3e4255;
+      padding: 2px;
+      line-height: 0;
+      transition: color 0.2s;
+    }
+    .icon-btn:hover { color: #7b8394; }
+
+    /* ── Send button (Verification code) ── */
+    .send-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #00c27a;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 0 4px 0 8px;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+    .send-btn:hover { opacity: 0.75; }
+    .send-btn:disabled {
+      color: #4e5465;
+      cursor: default;
+    }
+
+    /* ── Checkbox Row ── */
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 20px 0;
+      cursor: pointer;
+    }
+
+    .custom-checkbox {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #4a5068;
+      background: #22252f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .custom-checkbox.checked {
+      background: #f0a500;
+      border-color: #f0a500;
+    }
+
+    .custom-checkbox svg {
+      display: none;
+    }
+    .custom-checkbox.checked svg {
+      display: block;
+    }
+
+    .checkbox-text {
+      font-size: 15px;
+      color: #c8ccd8;
+      line-height: 1.4;
+    }
+
+    .terms-link {
+      color: #00c27a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .terms-link:hover { opacity: 0.8; }
+
+    /* ── Register CTA ── */
+    .register-cta {
+      width: 100%;
+      padding: 18px;
+      background-color: #f0a500;
+      color: #111111;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: filter 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 20px rgba(240,165,0,0.25);
+    }
+    .register-cta:hover { filter: brightness(1.07); }
+    .register-cta:active { transform: scale(0.98); filter: brightness(0.96); }
+
+    /* ── Sign-in row ── */
+    .signin-row {
+      font-size: 15px;
+      color: #9aa0b0;
+      margin-bottom: 10px;
+    }
+
+    .signin-link {
+      color: #00c27a;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 4px;
+      transition: opacity 0.2s;
+    }
+    .signin-link:hover { opacity: 0.8; }
+
+    /* Error message */
+    .error-msg {
+      color: #ff4d4f;
+      font-size: 13px;
+      margin-bottom: 12px;
+      min-height: 18px;
+      display: block;
+    }
+
+    /* Home indicator */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background-color: #2e3245;
+      border-radius: 2px;
+    }
+
+    /* Phone tab content hidden by default */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
 </head>
 <body>
-
-  <div class="bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
   <div class="app-container">
 
     <!-- Top Bar -->
-    <div class="auth-topbar">
-      <button class="btn-close" onclick="window.location.href='login.html'" aria-label="Back">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <div class="topbar">
+      <button class="btn-close" onclick="window.location.href='login.html'" aria-label="Back to login">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/>
           <line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <button class="btn-lang" aria-label="Language">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <button class="btn-language" aria-label="Change language">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       </button>
     </div>
 
-    <h1 class="auth-title">Register</h1>
+    <!-- Page Title -->
+    <h1 class="page-title">Register</h1>
 
-    <div class="auth-body">
+    <!-- Scrollable Form Body -->
+    <div class="page-body">
 
       <!-- Tab Switcher -->
       <div class="tab-switcher">
-        <button class="tab-btn active" id="tabEmailReg" onclick="switchRegTab('email')">Email</button>
-        <button class="tab-btn" id="tabPhoneReg" onclick="switchRegTab('phone')">Phone number</button>
+        <button class="tab-btn active" id="tabEmail" onclick="switchTab('email')">Email</button>
+        <button class="tab-btn" id="tabPhone" onclick="switchTab('phone')">Phone number</button>
       </div>
 
-      <!-- EMAIL CONTENT -->
-      <div id="emailRegContent">
+      <!-- ===== EMAIL TAB ===== -->
+      <div class="tab-content active" id="emailContent">
+
+        <!-- Email -->
         <div class="field-group">
-          <label class="field-label" for="regEmail">Email</label>
+          <label class="field-label" for="emailInput">Email</label>
           <div class="field-wrapper">
-            <input class="field-input" id="regEmail" type="email" placeholder="Enter your email address" autocomplete="email">
+            <input class="field-input" id="emailInput" type="email"
+                   placeholder="Please input your email" autocomplete="email"/>
             <div class="field-action">
-              <button class="icon-btn" onclick="clearField('regEmail')">
-                <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
+              <button class="icon-btn" onclick="clearField('emailInput')" aria-label="Clear email">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- PHONE CONTENT -->
-      <div id="phoneRegContent" style="display:none;">
+        <!-- Set Password -->
         <div class="field-group">
-          <label class="field-label" for="regPhone">Phone number</label>
+          <label class="field-label" for="setPwd">Set password</label>
           <div class="field-wrapper">
-            <input class="field-input" id="regPhone" type="tel" placeholder="Enter your phone number" autocomplete="tel">
+            <input class="field-input" id="setPwd" type="password"
+                   placeholder="Password (6-12 characters)" minlength="6" maxlength="12"/>
             <div class="field-action">
-              <button class="icon-btn" onclick="clearField('regPhone')">
-                <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
+              <button class="icon-btn" onclick="clearField('setPwd')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('setPwd','eye1')" aria-label="Toggle visibility">
+                <svg id="eye1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
               </button>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Login Password -->
-      <div class="field-group">
-        <label class="field-label" for="regPassword">Login Password</label>
-        <div class="field-wrapper">
-          <input class="field-input" id="regPassword" type="password" placeholder="6–20 characters (letters + numbers)" autocomplete="new-password">
-          <div class="field-action">
-            <button class="icon-btn" onclick="togglePwd('regPassword','eyeReg1')" aria-label="Toggle">
-              <svg id="eyeReg1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            </button>
+        <!-- Confirm Password -->
+        <div class="field-group">
+          <label class="field-label" for="confirmPwd">Confirm password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="confirmPwd" type="password"
+                   placeholder="Please confirm your password"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmPwd')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('confirmPwd','eye2')" aria-label="Toggle visibility">
+                <svg id="eye2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Confirm Password -->
-      <div class="field-group">
-        <label class="field-label" for="regPasswordConfirm">Confirm Password</label>
-        <div class="field-wrapper">
-          <input class="field-input" id="regPasswordConfirm" type="password" placeholder="Re-enter your password" autocomplete="new-password">
-          <div class="field-action">
-            <button class="icon-btn" onclick="togglePwd('regPasswordConfirm','eyeReg2')" aria-label="Toggle">
-              <svg id="eyeReg2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            </button>
+        <!-- Fund Password -->
+        <div class="field-group">
+          <label class="field-label" for="fundPwd">Fund password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="fundPwd" type="password"
+                   placeholder="Fund password(6 digits)" maxlength="6" inputmode="numeric"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('fundPwd')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('fundPwd','eye3')" aria-label="Toggle visibility">
+                <svg id="eye3" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Fund Password -->
-      <div class="field-group">
-        <label class="field-label" for="regFundPwd">Fund Password <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label>
-        <div class="field-wrapper">
-          <input class="field-input" id="regFundPwd" type="password" placeholder="4–6 digit fund security password">
-          <div class="field-action">
-            <button class="icon-btn" onclick="togglePwd('regFundPwd','eyeReg3')" aria-label="Toggle">
-              <svg id="eyeReg3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-                <line x1="1" y1="1" x2="23" y2="23"/>
-              </svg>
-            </button>
+        <!-- Confirm Fund Password -->
+        <div class="field-group">
+          <label class="field-label" for="confirmFundPwd">Confirm fund password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="confirmFundPwd" type="password"
+                   placeholder="Please confirm your funds password" maxlength="6" inputmode="numeric"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmFundPwd')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('confirmFundPwd','eye4')" aria-label="Toggle visibility">
+                <svg id="eye4" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Referral Code -->
-      <div class="field-group">
-        <label class="field-label" for="regReferral">Referral Code <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label>
-        <div class="field-wrapper">
-          <input class="field-input" id="regReferral" type="text" placeholder="Enter referral code (if any)" autocomplete="off">
-          <div class="field-action">
-            <button class="icon-btn" onclick="clearField('regReferral')">
-              <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
-            </button>
+        <!-- Verification Code -->
+        <div class="field-group">
+          <label class="field-label" for="verifyCode">Verification code</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="verifyCode" type="text"
+                   placeholder="Please enter verification code" inputmode="numeric" maxlength="6"/>
+            <div class="field-action">
+              <button class="send-btn" id="sendBtn" onclick="sendCode()">Send</button>
+            </div>
           </div>
         </div>
+
+        <!-- Invitation Code -->
+        <div class="field-group">
+          <label class="field-label" for="inviteCode">Invitation code</label>
+          <div class="field-wrapper darker">
+            <input class="field-input" id="inviteCode" type="text"
+                   placeholder="Please enter the invitation code"/>
+          </div>
+        </div>
+
+        <!-- Terms Checkbox -->
+        <div class="checkbox-row" onclick="toggleCheckbox()">
+          <div class="custom-checkbox" id="checkbox">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <span class="checkbox-text">I have read and agree<a class="terms-link" href="#" onclick="event.stopPropagation()">Terms of Service</a></span>
+        </div>
+
+        <!-- Error Message -->
+        <span class="error-msg" id="errorMsg"></span>
+
+        <!-- Register CTA -->
+        <button class="register-cta" onclick="handleRegister()">Register</button>
+
+        <!-- Sign in row -->
+        <p class="signin-row">Have an account<a class="signin-link" href="login.html">Sign in</a></p>
+
       </div>
 
-      <!-- Terms Checkbox -->
-      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;">
-        <input type="checkbox" id="termsCheck" style="margin-top:2px;accent-color:var(--gold);width:16px;height:16px;cursor:pointer;flex-shrink:0;">
-        <label for="termsCheck" style="font-size:13px;color:var(--text-muted);line-height:1.5;cursor:pointer;">
-          I have read and agree to the <span style="color:var(--gold);font-weight:600;">Terms of Service</span> and <span style="color:var(--gold);font-weight:600;">Privacy Policy</span>
-        </label>
+      <!-- ===== PHONE TAB ===== -->
+      <div class="tab-content" id="phoneContent">
+
+        <!-- Phone Number -->
+        <div class="field-group">
+          <label class="field-label" for="phoneInput">Phone number</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="phoneInput" type="tel"
+                   placeholder="Please enter your phone number" autocomplete="tel"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('phoneInput')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Set Password -->
+        <div class="field-group">
+          <label class="field-label" for="setPwdP">Set password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="setPwdP" type="password"
+                   placeholder="Password (6-12 characters)" minlength="6" maxlength="12"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('setPwdP')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('setPwdP','eyeP1')" aria-label="Toggle visibility">
+                <svg id="eyeP1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="field-group">
+          <label class="field-label" for="confirmPwdP">Confirm password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="confirmPwdP" type="password"
+                   placeholder="Please confirm your password"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmPwdP')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('confirmPwdP','eyeP2')" aria-label="Toggle visibility">
+                <svg id="eyeP2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fund Password -->
+        <div class="field-group">
+          <label class="field-label" for="fundPwdP">Fund password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="fundPwdP" type="password"
+                   placeholder="Fund password(6 digits)" maxlength="6" inputmode="numeric"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('fundPwdP')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('fundPwdP','eyeP3')" aria-label="Toggle visibility">
+                <svg id="eyeP3" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Fund Password -->
+        <div class="field-group">
+          <label class="field-label" for="confirmFundPwdP">Confirm fund password</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="confirmFundPwdP" type="password"
+                   placeholder="Please confirm your funds password" maxlength="6" inputmode="numeric"/>
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('confirmFundPwdP')" aria-label="Clear">
+                <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#323649"/><line x1="15" y1="9" x2="9" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#8a92a8" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <button class="icon-btn" onclick="togglePwd('confirmFundPwdP','eyeP4')" aria-label="Toggle visibility">
+                <svg id="eyeP4" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5a6278" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verification Code -->
+        <div class="field-group">
+          <label class="field-label" for="verifyCodeP">Verification code</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="verifyCodeP" type="text"
+                   placeholder="Please enter verification code" inputmode="numeric" maxlength="6"/>
+            <div class="field-action">
+              <button class="send-btn" id="sendBtnP" onclick="sendCodePhone()">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invitation Code -->
+        <div class="field-group">
+          <label class="field-label" for="inviteCodeP">Invitation code</label>
+          <div class="field-wrapper darker">
+            <input class="field-input" id="inviteCodeP" type="text"
+                   placeholder="Please enter the invitation code"/>
+          </div>
+        </div>
+
+        <!-- Terms Checkbox -->
+        <div class="checkbox-row" onclick="toggleCheckboxP()">
+          <div class="custom-checkbox" id="checkboxP">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <span class="checkbox-text">I have read and agree<a class="terms-link" href="#" onclick="event.stopPropagation()">Terms of Service</a></span>
+        </div>
+
+        <!-- Error -->
+        <span class="error-msg" id="errorMsgP"></span>
+
+        <!-- Register CTA -->
+        <button class="register-cta" onclick="handleRegisterPhone()">Register</button>
+
+        <!-- Sign in row -->
+        <p class="signin-row">Have an account<a class="signin-link" href="login.html">Sign in</a></p>
+
       </div>
 
-      <!-- Error -->
-      <span class="error-msg" id="regError"></span>
-
-      <!-- Register Button -->
-      <button class="btn-gold" id="regBtn" onclick="handleRegister(event)">Create Account</button>
-
-      <!-- Login link -->
-      <p class="auth-foot" style="margin-top:20px;">
-        Already have an account?&nbsp;<a class="login-link" href="login.html">Login</a>
-      </p>
-
-    </div>
+    </div><!-- end .page-body -->
 
     <div class="home-indicator"></div>
   </div>
 
   <script>
-    const pwdStates = {};
-
-    function switchRegTab(tab) {
-      const isEmail = tab === 'email';
-      document.getElementById('emailRegContent').style.display = isEmail ? 'block' : 'none';
-      document.getElementById('phoneRegContent').style.display = isEmail ? 'none' : 'block';
-      document.getElementById('tabEmailReg').classList.toggle('active', isEmail);
-      document.getElementById('tabPhoneReg').classList.toggle('active', !isEmail);
-      setError('');
+    // ── Tab switcher ──
+    function switchTab(tab) {
+      document.getElementById('emailContent').classList.toggle('active', tab === 'email');
+      document.getElementById('phoneContent').classList.toggle('active', tab === 'phone');
+      document.getElementById('tabEmail').classList.toggle('active', tab === 'email');
+      document.getElementById('tabPhone').classList.toggle('active', tab === 'phone');
     }
 
+    // ── Clear field ──
     function clearField(id) {
       const el = document.getElementById(id);
       if (el) { el.value = ''; el.focus(); }
     }
 
+    // ── Toggle password ──
+    const pwdStates = {};
     function togglePwd(inputId, iconId) {
-      pwdStates[inputId] = !pwdStates[inputId];
       const input = document.getElementById(inputId);
       const icon  = document.getElementById(iconId);
-      const vis   = pwdStates[inputId];
-      input.type = vis ? 'text' : 'password';
-      icon.innerHTML = vis
+      pwdStates[inputId] = !pwdStates[inputId];
+      const visible = pwdStates[inputId];
+      input.type = visible ? 'text' : 'password';
+      icon.innerHTML = visible
         ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
         : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
            <line x1="1" y1="1" x2="23" y2="23"/>`;
     }
 
-    function setError(msg) {
-      document.getElementById('regError').textContent = msg;
+    // ── Terms checkbox (email tab) ──
+    let agreed = false;
+    function toggleCheckbox() {
+      agreed = !agreed;
+      document.getElementById('checkbox').classList.toggle('checked', agreed);
     }
 
-    async function handleRegister(e) {
-      const btn = document.getElementById('regBtn');
-      const isEmail = document.getElementById('tabEmailReg').classList.contains('active');
-      const email    = document.getElementById('regEmail').value.trim();
-      const phone    = document.getElementById('regPhone').value.trim();
-      const password = document.getElementById('regPassword').value;
-      const confirm  = document.getElementById('regPasswordConfirm').value;
-      const fundPwd  = document.getElementById('regFundPwd').value;
-      const referral = document.getElementById('regReferral').value.trim();
-      const agreed   = document.getElementById('termsCheck').checked;
+    // ── Terms checkbox (phone tab) ──
+    let agreedP = false;
+    function toggleCheckboxP() {
+      agreedP = !agreedP;
+      document.getElementById('checkboxP').classList.toggle('checked', agreedP);
+    }
 
-      const identifier = isEmail ? email : phone;
+    // ── Send verification code (email tab) ──
+    let sending = false;
+    function sendCode() {
+      if (sending) return;
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email || !/\S+@\S+\.\S+/.test(email)) {
+        showError('errorMsg', 'Please enter a valid email first.');
+        return;
+      }
+      showError('errorMsg', '');
+      const btn = document.getElementById('sendBtn');
+      startCountdown(btn);
+    }
 
-      if (!identifier) { setError(isEmail ? 'Please enter your email address.' : 'Please enter your phone number.'); return; }
-      if (!password)   { setError('Please enter a login password.'); return; }
-      if (password.length < 6) { setError('Password must be at least 6 characters.'); return; }
-      if (password !== confirm) { setError('Passwords do not match.'); return; }
-      if (!agreed) { setError('Please agree to the Terms of Service.'); return; }
+    // ── Send verification code (phone tab) ──
+    let sendingP = false;
+    function sendCodePhone() {
+      if (sendingP) return;
+      const phone = document.getElementById('phoneInput').value.trim();
+      if (!phone) {
+        showError('errorMsgP', 'Please enter your phone number first.');
+        return;
+      }
+      showError('errorMsgP', '');
+      const btn = document.getElementById('sendBtnP');
+      startCountdown(btn);
+    }
 
-      setError('');
+    function startCountdown(btn) {
+      let count = 60;
       btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span>Creating account…';
+      btn.textContent = `${count}s`;
+      const timer = setInterval(() => {
+        count--;
+        if (count <= 0) {
+          clearInterval(timer);
+          btn.disabled = false;
+          btn.textContent = 'Send';
+        } else {
+          btn.textContent = `${count}s`;
+        }
+      }, 1000);
+    }
+
+    // ── Validate and Register (email tab) ──
+    async function handleRegister() {
+      const email   = document.getElementById('emailInput').value.trim();
+      const pwd     = document.getElementById('setPwd').value;
+      const cpwd    = document.getElementById('confirmPwd').value;
+      const fpwd    = document.getElementById('fundPwd').value;
+      const cfpwd   = document.getElementById('confirmFundPwd').value;
+      const vcode   = document.getElementById('verifyCode').value.trim();
+
+      if (!email)               return showError('errorMsg', 'Please enter your email.');
+      if (!/\S+@\S+\.\S+/.test(email)) return showError('errorMsg', 'Invalid email address.');
+      if (!pwd || pwd.length < 6) return showError('errorMsg', 'Password must be 6–12 characters.');
+      if (pwd !== cpwd)         return showError('errorMsg', 'Passwords do not match.');
+      if (!fpwd || fpwd.length !== 6) return showError('errorMsg', 'Fund password must be 6 digits.');
+      if (fpwd !== cfpwd)       return showError('errorMsg', 'Fund passwords do not match.');
+      if (!agreed)              return showError('errorMsg', 'Please agree to the Terms of Service.');
+
+      showError('errorMsg', '');
 
       try {
-        const isLocal = ['localhost','127.0.0.1'].includes(window.location.hostname);
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
-        const payload = { email: isEmail ? email : null, phone: isEmail ? null : phone, password, fundPassword: fundPwd || null, referralCode: referral || null };
-
-        const res  = await fetch(`${API_BASE}/api/signup`, {
+        const response = await fetch(`${API_BASE}/api/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ email, password: pwd, fundPassword: fpwd })
         });
+        const data = await response.json();
+        if (!response.ok) return showError('errorMsg', data.error || 'Registration failed.');
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          setError(data.error || 'Registration failed. Please try again.');
-          btn.disabled = false;
-          btn.textContent = 'Create Account';
-          return;
-        }
-
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        window.location.href = 'dashboard.html';
-
+        alert('Registration successful! Redirecting to Login...');
+        window.location.href = 'login.html';
       } catch (err) {
-        setError('Network error. Please try again.');
-        btn.disabled = false;
-        btn.textContent = 'Create Account';
+        showError('errorMsg', 'Network error. Make sure server is running on port 3000.');
+        console.error(err);
       }
+    }
+
+    // ── Validate and Register (phone tab) ──
+    async function handleRegisterPhone() {
+      const phone = document.getElementById('phoneInput').value.trim();
+      const pwd   = document.getElementById('setPwdP').value;
+      const cpwd  = document.getElementById('confirmPwdP').value;
+      const fpwd  = document.getElementById('fundPwdP').value;
+      const cfpwd = document.getElementById('confirmFundPwdP').value;
+
+      if (!phone)               return showError('errorMsgP', 'Please enter your phone number.');
+      if (!pwd || pwd.length < 6) return showError('errorMsgP', 'Password must be 6–12 characters.');
+      if (pwd !== cpwd)         return showError('errorMsgP', 'Passwords do not match.');
+      if (!fpwd || fpwd.length !== 6) return showError('errorMsgP', 'Fund password must be 6 digits.');
+      if (fpwd !== cfpwd)       return showError('errorMsgP', 'Fund passwords do not match.');
+      if (!agreedP)             return showError('errorMsgP', 'Please agree to the Terms of Service.');
+
+      showError('errorMsgP', '');
+
+      try {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+        const response = await fetch(`${API_BASE}/api/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, password: pwd, fundPassword: fpwd })
+        });
+        const data = await response.json();
+        if (!response.ok) return showError('errorMsgP', data.error || 'Registration failed.');
+
+        alert('Registration successful! Redirecting to Login...');
+        window.location.href = 'login.html';
+      } catch (err) {
+        showError('errorMsgP', 'Network error. Make sure server is running on port 3000.');
+        console.error(err);
+      }
+    }
+
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = msg;
     }
   </script>
 </body>
