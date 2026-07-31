@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rate Us – Kore Exchange</title>
+  <meta name="description" content="Share your experience with Kore Exchange. Your feedback helps us improve our platform for all traders.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Top Bar -->
+    <div class="auth-topbar">
+      <button class="btn-close" onclick="history.back()" aria-label="Back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:28px;height:28px;background:linear-gradient(135deg,var(--gold),var(--gold-bright));border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#111;box-shadow:0 0 10px var(--gold-glow);">K</div>
+        <span style="font-size:14px;font-weight:700;">KORE Investment</span>
+      </div>
+      <div style="width:38px;"></div>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div class="review-body" id="reviewBody">
+
+      <!-- Hero -->
+      <div class="review-hero">
+        <span class="review-emoji">⭐</span>
+        <h1 class="review-title">Your Opinion <span>Matters</span></h1>
+        <p class="review-sub">Help us improve by sharing your experience. It only takes a minute!</p>
+      </div>
+
+      <!-- Overall Star Rating -->
+      <div class="star-section" id="starSection">
+        <p class="star-section-label">Overall Experience</p>
+        <div class="stars-main" id="mainStars" role="group" aria-label="Overall rating">
+          <span class="star-main" data-val="1" onclick="setMainRating(1)" onmouseenter="hoverMain(1)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="2" onclick="setMainRating(2)" onmouseenter="hoverMain(2)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="3" onclick="setMainRating(3)" onmouseenter="hoverMain(3)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="4" onclick="setMainRating(4)" onmouseenter="hoverMain(4)" onmouseleave="unhoverMain()">⭐</span>
+          <span class="star-main" data-val="5" onclick="setMainRating(5)" onmouseenter="hoverMain(5)" onmouseleave="unhoverMain()">⭐</span>
+        </div>
+        <div class="rating-label" id="ratingLabel">Tap a star to rate</div>
+      </div>
+
+      <!-- Category Ratings -->
+      <div style="margin-bottom:18px;">
+        <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:12px;">Rate by Category</div>
+
+        <div class="category-item" id="cat-returns">
+          <div class="category-left">
+            <div class="category-icon">💰</div>
+            <span class="category-name">Returns</span>
+          </div>
+          <div class="category-stars" id="stars-returns">
+            <span class="cat-star" data-val="1" onclick="setCatRating('returns',1)">⭐</span>
+            <span class="cat-star" data-val="2" onclick="setCatRating('returns',2)">⭐</span>
+            <span class="cat-star" data-val="3" onclick="setCatRating('returns',3)">⭐</span>
+            <span class="cat-star" data-val="4" onclick="setCatRating('returns',4)">⭐</span>
+            <span class="cat-star" data-val="5" onclick="setCatRating('returns',5)">⭐</span>
+          </div>
+        </div>
+
+        <div class="category-item" id="cat-support">
+          <div class="category-left">
+            <div class="category-icon">🎧</div>
+            <span class="category-name">Support</span>
+          </div>
+          <div class="category-stars" id="stars-support">
+            <span class="cat-star" data-val="1" onclick="setCatRating('support',1)">⭐</span>
+            <span class="cat-star" data-val="2" onclick="setCatRating('support',2)">⭐</span>
+            <span class="cat-star" data-val="3" onclick="setCatRating('support',3)">⭐</span>
+            <span class="cat-star" data-val="4" onclick="setCatRating('support',4)">⭐</span>
+            <span class="cat-star" data-val="5" onclick="setCatRating('support',5)">⭐</span>
+          </div>
+        </div>
+
+        <div class="category-item" id="cat-platform">
+          <div class="category-left">
+            <div class="category-icon">📱</div>
+            <span class="category-name">Platform</span>
+          </div>
+          <div class="category-stars" id="stars-platform">
+            <span class="cat-star" data-val="1" onclick="setCatRating('platform',1)">⭐</span>
+            <span class="cat-star" data-val="2" onclick="setCatRating('platform',2)">⭐</span>
+            <span class="cat-star" data-val="3" onclick="setCatRating('platform',3)">⭐</span>
+            <span class="cat-star" data-val="4" onclick="setCatRating('platform',4)">⭐</span>
+            <span class="cat-star" data-val="5" onclick="setCatRating('platform',5)">⭐</span>
+          </div>
+        </div>
+
+        <div class="category-item" id="cat-security">
+          <div class="category-left">
+            <div class="category-icon">🔒</div>
+            <span class="category-name">Security</span>
+          </div>
+          <div class="category-stars" id="stars-security">
+            <span class="cat-star" data-val="1" onclick="setCatRating('security',1)">⭐</span>
+            <span class="cat-star" data-val="2" onclick="setCatRating('security',2)">⭐</span>
+            <span class="cat-star" data-val="3" onclick="setCatRating('security',3)">⭐</span>
+            <span class="cat-star" data-val="4" onclick="setCatRating('security',4)">⭐</span>
+            <span class="cat-star" data-val="5" onclick="setCatRating('security',5)">⭐</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Written Review -->
+      <label style="font-size:14px;font-weight:700;color:var(--text-primary);display:block;margin-bottom:10px;">Tell us more (optional)</label>
+      <textarea
+        class="review-textarea"
+        id="reviewText"
+        placeholder="Share your experience with KORE Exchange. What did you love? What can we improve?"
+        maxlength="400"
+        oninput="updateCharCount()"
+      ></textarea>
+      <div class="char-count"><span id="charCount">0</span>/400</div>
+
+      <!-- Tag Pills -->
+      <label style="font-size:14px;font-weight:700;color:var(--text-primary);display:block;margin-bottom:10px;">Quick Tags</label>
+      <div class="tags-grid">
+        <span class="tag-pill" onclick="toggleTag(this)">Easy to use</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Fast withdrawals</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Great returns</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Helpful support</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Secure platform</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Good UI</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Needs improvement</span>
+        <span class="tag-pill" onclick="toggleTag(this)">Would recommend</span>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn-gold" id="submitBtn" onclick="submitReview(event)">
+        Submit My Review ✨
+      </button>
+
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-circle">🏆</div>
+      <div class="success-stars" id="successStars">⭐⭐⭐⭐⭐</div>
+      <h2 class="success-title">Thank You!</h2>
+      <p class="success-sub">
+        Your review has been submitted.<br>
+        We truly appreciate your feedback and will use it to make KORE Exchange even better.
+      </p>
+      <button class="btn-ghost" onclick="window.location.href='confirmed.html'">Continue</button>
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    let mainRating = 0;
+    const catRatings = { returns: 0, support: 0, platform: 0, security: 0 };
+    const ratingLabels = ['', 'Poor 😞', 'Fair 😐', 'Good 🙂', 'Great 😊', 'Excellent 🤩'];
+
+    function hoverMain(val) {
+      document.querySelectorAll('.star-main').forEach(s => {
+        const sv = parseInt(s.dataset.val);
+        s.classList.toggle('hovered', sv <= val);
+        if (sv <= val) s.classList.remove('selected');
+        else s.classList.remove('hovered','selected');
+      });
+      document.getElementById('ratingLabel').textContent = ratingLabels[val];
+    }
+
+    function unhoverMain() {
+      document.querySelectorAll('.star-main').forEach(s => {
+        s.classList.remove('hovered');
+        s.classList.toggle('selected', parseInt(s.dataset.val) <= mainRating);
+      });
+      document.getElementById('ratingLabel').textContent = mainRating ? ratingLabels[mainRating] : 'Tap a star to rate';
+    }
+
+    function setMainRating(val) {
+      mainRating = val;
+      document.querySelectorAll('.star-main').forEach(s => {
+        s.classList.remove('hovered');
+        s.classList.toggle('selected', parseInt(s.dataset.val) <= val);
+      });
+      document.getElementById('ratingLabel').textContent = ratingLabels[val];
+      document.getElementById('starSection').style.borderColor = 'rgba(240,165,0,0.5)';
+      if (navigator.vibrate) navigator.vibrate(30);
+    }
+
+    function setCatRating(cat, val) {
+      catRatings[cat] = val;
+      document.getElementById('stars-' + cat).querySelectorAll('.cat-star').forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.val) <= val);
+      });
+      document.getElementById('cat-' + cat).classList.add('rated');
+      if (navigator.vibrate) navigator.vibrate(20);
+    }
+
+    function toggleTag(el) { el.classList.toggle('selected'); }
+
+    function updateCharCount() {
+      document.getElementById('charCount').textContent = document.getElementById('reviewText').value.length;
+    }
+
+    async function submitReview(e) {
+      if (mainRating === 0) {
+        const sec = document.getElementById('starSection');
+        sec.style.borderColor = 'rgba(255,77,79,0.6)';
+        sec.style.background  = 'rgba(255,77,79,0.04)';
+        const lbl = document.getElementById('ratingLabel');
+        lbl.style.color = '#ff4d4f';
+        lbl.textContent = 'Please select a rating first!';
+        setTimeout(() => {
+          sec.style.borderColor = '';
+          sec.style.background  = '';
+          lbl.style.color = '';
+          lbl.textContent = 'Tap a star to rate';
+        }, 1400);
+        return;
+      }
+
+      // Ripple
+      const btn = document.getElementById('submitBtn');
+      const rect = btn.getBoundingClientRect();
+      const rp = document.createElement('span');
+      rp.className = 'ripple';
+      rp.style.cssText = `width:60px;height:60px;left:${e.clientX - rect.left - 30}px;top:${e.clientY - rect.top - 30}px;`;
+      btn.appendChild(rp);
+      setTimeout(() => rp.remove(), 700);
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Submitting…';
+
+      const selectedTags = [...document.querySelectorAll('.tag-pill.selected')].map(t => t.textContent.trim());
+      const payload = {
+        overall: mainRating,
+        categories: catRatings,
+        tags: selectedTags,
+        review: document.getElementById('reviewText').value.trim()
+      };
+
+      try {
+        const isLocal = ['localhost','127.0.0.1'].includes(window.location.hostname);
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+        await fetch(API_BASE + '/api/review', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch(_) { /* silently continue */ }
+
+      setTimeout(() => {
+        document.getElementById('successStars').textContent = '⭐'.repeat(mainRating);
+        document.getElementById('successOverlay').classList.add('visible');
+        setTimeout(() => { window.location.href = 'confirmed.html'; }, 1800);
+      }, 500);
+    }
+  </script>
+</body>
+</html>

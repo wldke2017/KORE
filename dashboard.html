@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Dashboard – Kore Exchange</title>
+  <meta name="description" content="Your Kore Exchange account dashboard. View your portfolio balance, trade history, and quick actions.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <main class="scroll-content">
+
+      <!-- Top Bar -->
+      <div class="dash-topbar">
+        <div>
+          <div class="dash-greeting">Welcome back 👋</div>
+          <div class="dash-username" id="dashUsername">Kore User</div>
+        </div>
+        <button class="notif-btn" onclick="showToast('No new notifications', 'gold')" aria-label="Notifications">
+          <div class="notif-dot"></div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Balance Card -->
+      <div class="balance-card">
+        <div class="balance-label">Total Portfolio</div>
+        <div class="balance-amount" id="balanceAmount">$0.00</div>
+        <div class="balance-sub" id="balanceSub">≈ 0.00000000 BTC</div>
+        <div class="balance-actions">
+          <button class="balance-btn primary" onclick="showToast('Opening Deposit…', 'gold')">⬇ Deposit</button>
+          <button class="balance-btn secondary" onclick="showToast('Opening Withdraw…', 'gold')">⬆ Withdraw</button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card" onclick="showToast('Today\'s P&L', 'gold')">
+          <div class="stat-icon stat-icon-green">📈</div>
+          <div class="stat-value" style="color:var(--green)">+0.00%</div>
+          <div class="stat-label">Today P&amp;L</div>
+        </div>
+        <div class="stat-card" onclick="showToast('Total Earnings', 'gold')">
+          <div class="stat-icon stat-icon-gold">💰</div>
+          <div class="stat-value">$0.00</div>
+          <div class="stat-label">Total Earned</div>
+        </div>
+        <div class="stat-card" onclick="showToast('Your Rank', 'gold')">
+          <div class="stat-icon stat-icon-blue">🏅</div>
+          <div class="stat-value">Standard</div>
+          <div class="stat-label">VIP Level</div>
+        </div>
+        <div class="stat-card" onclick="showToast('Referral info', 'gold')">
+          <div class="stat-icon stat-icon-red">👥</div>
+          <div class="stat-value">0</div>
+          <div class="stat-label">Referrals</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <div class="section-title">Quick Actions</div>
+        <div class="qa-grid">
+
+          <div class="qa-item" onclick="showToast('Deposit – Coming soon', 'gold')">
+            <div class="qa-icon qa-icon-gold">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </div>
+            <span class="qa-label">Deposit</span>
+          </div>
+
+          <div class="qa-item" onclick="showToast('Withdraw – Coming soon', 'gold')">
+            <div class="qa-icon qa-icon-green">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+              </svg>
+            </div>
+            <span class="qa-label">Withdraw</span>
+          </div>
+
+          <div class="qa-item" onclick="showToast('Transfer – Coming soon', 'gold')">
+            <div class="qa-icon qa-icon-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3L4 7l4 4"/><path d="M4 7h16"/><path d="M16 21l4-4-4-4"/><path d="M20 17H4"/>
+              </svg>
+            </div>
+            <span class="qa-label">Transfer</span>
+          </div>
+
+          <div class="qa-item" onclick="showToast('History – Coming soon', 'gold')">
+            <div class="qa-icon qa-icon-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="qa-label">History</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Account Settings Links -->
+      <div style="padding: 0 16px 16px;">
+        <div class="section-title">Account</div>
+
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+
+          <div class="menu-row" onclick="showToast('Security settings', 'gold')">
+            <div class="menu-row-left">
+              <div class="menu-icon">🔒</div>
+              <span>Security Settings</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="showToast('KYC Verification', 'gold')">
+            <div class="menu-row-left">
+              <div class="menu-icon">🪪</div>
+              <span>Identity Verification</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="showToast('Referral Program', 'gold')">
+            <div class="menu-row-left">
+              <div class="menu-icon">🎁</div>
+              <span>Referral Program</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="menu-row" onclick="window.location.href='review.html'">
+            <div class="menu-row-left">
+              <div class="menu-icon">⭐</div>
+              <span>Rate Us</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+          <div class="menu-row menu-row-danger" onclick="handleLogout()">
+            <div class="menu-row-left">
+              <div class="menu-icon">🚪</div>
+              <span style="color:var(--red)">Log Out</span>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="activity-section">
+        <div class="section-title">Recent Activity</div>
+
+        <div id="activityList">
+          <div style="text-align:center;padding:40px 20px;color:var(--text-muted);">
+            <div style="font-size:36px;margin-bottom:12px;">📭</div>
+            <div style="font-size:14px;font-weight:600;">No activity yet</div>
+            <div style="font-size:12px;margin-top:4px;">Your transaction history will appear here</div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav" role="navigation">
+      <a href="index.html" class="nav-item" id="tabHome">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <span class="nav-label">Home</span>
+      </a>
+
+      <a href="#" class="nav-item" onclick="showToast('Trade – Coming soon','gold')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <span class="nav-label">Trade</span>
+      </a>
+
+      <a href="#" class="nav-item" onclick="showToast('Contract – Coming soon','gold')">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.8"/>
+            <line x1="7" y1="17" x2="7" y2="13"/><line x1="12" y1="17" x2="12" y2="9"/><line x1="17" y1="17" x2="17" y2="7"/>
+            <path d="M7 11L12 7L17 5" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <span class="nav-label">Contract</span>
+      </a>
+
+      <a href="dashboard.html" class="nav-item active" id="tabAccount">
+        <div class="nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1" fill="currentColor"/>
+            <path d="M9.5 15a3.5 3.5 0 0 0 5 0"/>
+          </svg>
+        </div>
+        <span class="nav-label">Account</span>
+      </a>
+    </nav>
+
+    <div class="home-indicator"></div>
+  </div>
+
+  <style>
+    .menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .menu-row:last-child { border-bottom: none; }
+    .menu-row:hover { background: rgba(255,255,255,0.03); }
+    .menu-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .menu-icon { font-size: 18px; width: 24px; text-align: center; }
+  </style>
+
+  <script src="app.js"></script>
+  <script>
+    // Load user info
+    window.addEventListener('DOMContentLoaded', () => {
+      const token = localStorage.getItem('authToken');
+      const userStr = localStorage.getItem('user');
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+      if (userStr) {
+        try {
+          const user = JSON.parse(userStr);
+          const name = user.email || user.phone || 'Kore User';
+          document.getElementById('dashUsername').textContent = name.length > 22 ? name.substring(0, 22) + '…' : name;
+        } catch(_) {}
+      }
+    });
+
+    function handleLogout() {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+
+    function showToast(msg, type) {
+      const t = document.createElement('div');
+      t.className = `toast toast-${type || 'gold'} toast-show`;
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => { t.classList.remove('toast-show'); setTimeout(() => t.remove(), 300); }, 2200);
+    }
+  </script>
+</body>
+</html>

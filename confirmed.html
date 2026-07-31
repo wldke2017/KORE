@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Review Submitted – Kore Exchange</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .confirmed-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .confirm-anim {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-bottom: 28px;
+      box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(240,165,0,0.15);
+      animation: confirm-pulse 2s ease-in-out infinite, pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes pop-in {
+      0%   { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes confirm-pulse {
+      0%,100% { box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(240,165,0,0.15); }
+      50%      { box-shadow: 0 0 60px rgba(240,165,0,0.55), 0 0 120px rgba(240,165,0,0.25); }
+    }
+    .confirm-stars {
+      display: flex; gap: 8px; font-size: 32px;
+      margin-bottom: 24px;
+      animation: stars-appear 0.5s ease 0.3s both;
+    }
+    @keyframes stars-appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .confirm-title {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      animation: fade-up 0.5s ease 0.4s both;
+    }
+    .confirm-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      animation: fade-up 0.5s ease 0.5s both;
+    }
+    .confirm-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      animation: fade-up 0.5s ease 0.6s both;
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+    <div class="confirmed-page">
+
+      <div class="confirm-anim">🏆</div>
+      <div class="confirm-stars">⭐⭐⭐⭐⭐</div>
+      <h1 class="confirm-title">Thank You!</h1>
+      <p class="confirm-sub">
+        Your review has been submitted successfully.<br>
+        Your feedback means the world to us and helps KORE Exchange grow!
+      </p>
+
+      <div class="confirm-btns">
+        <button class="btn-gold" onclick="window.location.href='index.html'">
+          Back to Home
+        </button>
+        <button class="btn-ghost" onclick="window.location.href='https://www.koreexbe.com/wap/#/home'" style="font-size:14px;">
+          Open Kore Exchange App
+        </button>
+      </div>
+
+    </div>
+    <div class="home-indicator"></div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Register – Kore Exchange</title>
+  <meta name="description" content="Create your Kore Exchange account. Join millions of traders worldwide for live crypto trading and market signals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- Top Bar -->
+    <div class="auth-topbar">
+      <button class="btn-close" onclick="window.location.href='login.html'" aria-label="Back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <button class="btn-lang" aria-label="Language">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </button>
+    </div>
+
+    <h1 class="auth-title">Register</h1>
+
+    <div class="auth-body">
+
+      <!-- Tab Switcher -->
+      <div class="tab-switcher">
+        <button class="tab-btn active" id="tabEmailReg" onclick="switchRegTab('email')">Email</button>
+        <button class="tab-btn" id="tabPhoneReg" onclick="switchRegTab('phone')">Phone number</button>
+      </div>
+
+      <!-- EMAIL CONTENT -->
+      <div id="emailRegContent">
+        <div class="field-group">
+          <label class="field-label" for="regEmail">Email</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="regEmail" type="email" placeholder="Enter your email address" autocomplete="email">
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('regEmail')">
+                <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHONE CONTENT -->
+      <div id="phoneRegContent" style="display:none;">
+        <div class="field-group">
+          <label class="field-label" for="regPhone">Phone number</label>
+          <div class="field-wrapper">
+            <input class="field-input" id="regPhone" type="tel" placeholder="Enter your phone number" autocomplete="tel">
+            <div class="field-action">
+              <button class="icon-btn" onclick="clearField('regPhone')">
+                <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login Password -->
+      <div class="field-group">
+        <label class="field-label" for="regPassword">Login Password</label>
+        <div class="field-wrapper">
+          <input class="field-input" id="regPassword" type="password" placeholder="6–20 characters (letters + numbers)" autocomplete="new-password">
+          <div class="field-action">
+            <button class="icon-btn" onclick="togglePwd('regPassword','eyeReg1')" aria-label="Toggle">
+              <svg id="eyeReg1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="field-group">
+        <label class="field-label" for="regPasswordConfirm">Confirm Password</label>
+        <div class="field-wrapper">
+          <input class="field-input" id="regPasswordConfirm" type="password" placeholder="Re-enter your password" autocomplete="new-password">
+          <div class="field-action">
+            <button class="icon-btn" onclick="togglePwd('regPasswordConfirm','eyeReg2')" aria-label="Toggle">
+              <svg id="eyeReg2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fund Password -->
+      <div class="field-group">
+        <label class="field-label" for="regFundPwd">Fund Password <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label>
+        <div class="field-wrapper">
+          <input class="field-input" id="regFundPwd" type="password" placeholder="4–6 digit fund security password">
+          <div class="field-action">
+            <button class="icon-btn" onclick="togglePwd('regFundPwd','eyeReg3')" aria-label="Toggle">
+              <svg id="eyeReg3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Referral Code -->
+      <div class="field-group">
+        <label class="field-label" for="regReferral">Referral Code <span style="color:var(--text-muted);font-weight:400;">(optional)</span></label>
+        <div class="field-wrapper">
+          <input class="field-input" id="regReferral" type="text" placeholder="Enter referral code (if any)" autocomplete="off">
+          <div class="field-action">
+            <button class="icon-btn" onclick="clearField('regReferral')">
+              <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#3e4255"/><line x1="15" y1="9" x2="9" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="9" x2="15" y2="15" stroke="#9aa0b0" stroke-width="2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terms Checkbox -->
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;">
+        <input type="checkbox" id="termsCheck" style="margin-top:2px;accent-color:var(--gold);width:16px;height:16px;cursor:pointer;flex-shrink:0;">
+        <label for="termsCheck" style="font-size:13px;color:var(--text-muted);line-height:1.5;cursor:pointer;">
+          I have read and agree to the <span style="color:var(--gold);font-weight:600;">Terms of Service</span> and <span style="color:var(--gold);font-weight:600;">Privacy Policy</span>
+        </label>
+      </div>
+
+      <!-- Error -->
+      <span class="error-msg" id="regError"></span>
+
+      <!-- Register Button -->
+      <button class="btn-gold" id="regBtn" onclick="handleRegister(event)">Create Account</button>
+
+      <!-- Login link -->
+      <p class="auth-foot" style="margin-top:20px;">
+        Already have an account?&nbsp;<a class="login-link" href="login.html">Login</a>
+      </p>
+
+    </div>
+
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    const pwdStates = {};
+
+    function switchRegTab(tab) {
+      const isEmail = tab === 'email';
+      document.getElementById('emailRegContent').style.display = isEmail ? 'block' : 'none';
+      document.getElementById('phoneRegContent').style.display = isEmail ? 'none' : 'block';
+      document.getElementById('tabEmailReg').classList.toggle('active', isEmail);
+      document.getElementById('tabPhoneReg').classList.toggle('active', !isEmail);
+      setError('');
+    }
+
+    function clearField(id) {
+      const el = document.getElementById(id);
+      if (el) { el.value = ''; el.focus(); }
+    }
+
+    function togglePwd(inputId, iconId) {
+      pwdStates[inputId] = !pwdStates[inputId];
+      const input = document.getElementById(inputId);
+      const icon  = document.getElementById(iconId);
+      const vis   = pwdStates[inputId];
+      input.type = vis ? 'text' : 'password';
+      icon.innerHTML = vis
+        ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
+        : `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+           <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+           <line x1="1" y1="1" x2="23" y2="23"/>`;
+    }
+
+    function setError(msg) {
+      document.getElementById('regError').textContent = msg;
+    }
+
+    async function handleRegister(e) {
+      const btn = document.getElementById('regBtn');
+      const isEmail = document.getElementById('tabEmailReg').classList.contains('active');
+      const email    = document.getElementById('regEmail').value.trim();
+      const phone    = document.getElementById('regPhone').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const confirm  = document.getElementById('regPasswordConfirm').value;
+      const fundPwd  = document.getElementById('regFundPwd').value;
+      const referral = document.getElementById('regReferral').value.trim();
+      const agreed   = document.getElementById('termsCheck').checked;
+
+      const identifier = isEmail ? email : phone;
+
+      if (!identifier) { setError(isEmail ? 'Please enter your email address.' : 'Please enter your phone number.'); return; }
+      if (!password)   { setError('Please enter a login password.'); return; }
+      if (password.length < 6) { setError('Password must be at least 6 characters.'); return; }
+      if (password !== confirm) { setError('Passwords do not match.'); return; }
+      if (!agreed) { setError('Please agree to the Terms of Service.'); return; }
+
+      setError('');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Creating account…';
+
+      try {
+        const isLocal = ['localhost','127.0.0.1'].includes(window.location.hostname);
+        const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+        const payload = { email: isEmail ? email : null, phone: isEmail ? null : phone, password, fundPassword: fundPwd || null, referralCode: referral || null };
+
+        const res  = await fetch(`${API_BASE}/api/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setError(data.error || 'Registration failed. Please try again.');
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+          return;
+        }
+
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = 'dashboard.html';
+
+      } catch (err) {
+        setError('Network error. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    }
+  </script>
+</body>
+</html>
