@@ -145,7 +145,7 @@ app.post('/api/review', async (req, res) => {
 });
 
 // ── Start Server ──────────────────────────────────────────
-if (process.env.NODE_ENV !== 'production' || require.main === module) {
+if (process.env.NODE_ENV !== 'production' && require.main === module) {
   app.listen(PORT, () => {
     console.log(`✅ Kore Exchange Server running on http://localhost:${PORT}`);
   });
