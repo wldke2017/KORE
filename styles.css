@@ -54,35 +54,32 @@ body {
 }
 
 /* ==========================================================================
-   Yellow Header Section (100% Exact Colors & Placement from koreexbe.com)
+   Yellow Header Section (100% Exact Match of Target Site)
    ========================================================================== */
 .header-yellow {
-  background-color: #e59b0b; /* Exact golden yellow header */
-  padding: 16px 16px 20px 16px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  background-color: #f7f230; /* Electric bright neon yellow matching screenshot */
+  padding: 16px 16px 22px 16px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   color: #111111;
   position: relative;
 }
 
-/* Support & Profile Icons in Header */
-.header-top-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.icon-circle-btn {
-  width: 34px;
-  height: 34px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
+/* Floating Online Support Widget on right edge */
+.floating-support-badge {
+  position: absolute;
+  top: 140px;
+  right: 0;
+  background: #ffffff;
+  border-radius: 50% 0 0 50%;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: -2px 2px 10px rgba(0,0,0,0.15);
+  z-index: 25;
   cursor: pointer;
-  border: none;
-  backdrop-filter: blur(4px);
 }
 
 /* Top Nav */
@@ -90,7 +87,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .brand {
@@ -106,48 +103,68 @@ body {
 }
 
 .brand-title {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 800;
   color: #111111;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
 }
 
-/* Assets Row */
+/* Profile Icon on right side of Assets */
+.header-profile-box {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -10px;
+  margin-bottom: 4px;
+}
+
+.profile-circle-btn {
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Assets Section */
 .assets-section {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   margin-bottom: 22px;
 }
 
 .assets-label {
-  font-size: 24px;
-  font-weight: 800;
-  color: #111111;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7a7612;
 }
 
 .login-btn {
-  background-color: #111111; /* Dark solid black pill button */
-  color: #e59b0b; /* Gold text */
-  font-size: 13px;
+  background-color: #e2990d; /* Bright Golden Orange rectangular badge button */
+  color: #111111;
+  font-size: 14px;
   font-weight: 700;
-  padding: 7px 24px;
+  padding: 7px 22px;
   border: none;
-  border-radius: 100px;
+  border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.1s ease, filter 0.2s ease;
+  box-shadow: none;
 }
 
 .login-btn:active {
   transform: scale(0.96);
 }
 
-/* Action Icons Row */
+/* Action Icons Row (Deposit, Share, Online Service, Withdraw) */
 .action-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  gap: 4px;
   text-align: center;
 }
 
@@ -160,20 +177,20 @@ body {
 }
 
 .action-circle {
-  width: 50px;
-  height: 50px;
-  background-color: #c9880a; /* Darker gold action circles matching screenshot */
+  width: 48px;
+  height: 48px;
+  background-color: #181920; /* Dark solid black/charcoal circles */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.15s ease, background-color 0.2s ease;
 }
 
 .action-item:hover .action-circle {
   transform: translateY(-2px);
-  background-color: #b57a08;
+  background-color: #222530;
 }
 
 .action-label {
