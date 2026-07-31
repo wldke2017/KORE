@@ -83,14 +83,23 @@
         </div>
 
         <!-- Assets Row -->
-        <div class="assets-section">
-          <div style="display:flex;align-items:center;gap:6px;">
-            <span class="assets-label">Assets</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a7612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;" onclick="toggleAssetsVisibility()">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-            </svg>
+        <div class="assets-section" id="assetsSection">
+          <!-- Shown when NOT logged in -->
+          <div id="preLoginAssets">
+            <span class="assets-label" style="display:block;margin-bottom:8px;">Assets</span>
+            <button class="login-btn" id="loginBtn" onclick="window.location.href='login.html'">Login</button>
           </div>
-          <div id="assetsValue" style="font-size:28px;font-weight:800;color:#111111;margin-top:2px;">0 $</div>
+
+          <!-- Shown when LOGGED IN -->
+          <div id="postLoginAssets" style="display:none;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="assets-label">Assets</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7a7612" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor:pointer;" onclick="toggleAssetsVisibility()">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <div id="assetsValue" style="font-size:28px;font-weight:800;color:#111111;margin-top:2px;">0 $</div>
+          </div>
         </div>
 
         <!-- Action Grid -->

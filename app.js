@@ -8,6 +8,37 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ═══════════════════════════════════════════════════════════
+  //  AUTH & BALANCE CHECK
+  // ═══════════════════════════════════════════════════════════
+  const preLoginEl  = document.getElementById('preLoginAssets');
+  const postLoginEl = document.getElementById('postLoginAssets');
+  const userToken   = localStorage.getItem('authToken');
+  const userData    = localStorage.getItem('user');
+
+  if (userToken && postLoginEl && preLoginEl) {
+    preLoginEl.style.display = 'none';
+    postLoginEl.style.display = 'block';
+    
+    // Fetch logged in user balance from PostgreSQL
+    try {
+      const parsedUser = JSON.parse(userData || '{}');
+      const identifier = parsedUser.email || parsedUser.phone || 'default';
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const API_BASE = (isLocal && !window.location.port.includes('3000')) ? 'http://localhost:3000' : '';
+      
+      fetch(`${API_BASE}/api/balance?identifier=${encodeURIComponent(identifier)}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.balance_usdt !== undefined) {
+            const assetsVal = document.getElementById('assetsValue');
+            if (assetsVal) assetsVal.textContent = `${parseFloat(data.balance_usdt).toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:2})} $`;
+          }
+        })
+        .catch(err => console.error('Error fetching balance:', err));
+    } catch (_) {}
+  }
+
+  // ═══════════════════════════════════════════════════════════
   //  BANNER CAROUSEL
   // ═══════════════════════════════════════════════════════════
   const track    = document.getElementById('carouselTrack');
